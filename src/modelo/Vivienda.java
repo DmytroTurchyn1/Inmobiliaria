@@ -14,7 +14,7 @@ enum Calidad_VIVIENDA {
 
 public class Vivienda {
 
-     Estado_VIVIENDA estado = Estado_VIVIENDA.LIBRE;
+     Estado_VIVIENDA estado = Estado_VIVIENDA.RESERVADO;
      double precio;
      double metrosCuadrados;
      int habitaciones;
