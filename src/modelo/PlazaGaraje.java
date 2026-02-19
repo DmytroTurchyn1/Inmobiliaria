@@ -66,7 +66,7 @@ public class PlazaGaraje {
     }
 
     public boolean cumpleSuperficie(double supMax, double supMin){
-        if (metrosCuadrados < supMin && metrosCuadrados > supMax){
+        if (metrosCuadrados >= supMin && metrosCuadrados <= supMax){
             return true;
         }
         else{
@@ -74,7 +74,7 @@ public class PlazaGaraje {
         }
     }
 
-    public static boolean cumplePrecio(double precioMax, double precioMin, double precio ){
+    public boolean cumplePrecio(double precioMax, double precioMin ){
         return precio >= precioMin && precio <= precioMax;
     }
 
@@ -109,6 +109,34 @@ public class PlazaGaraje {
         estado = Estado.LIBRE;
         dniComprador = null;
     }
+
+
+    @Override
+    public String toString() {
+        return switch (this.estado) {
+            case LIBRE -> "L";
+            case VENDIDA -> "V";
+        };
+    }
+
+    public String getDetalles() {
+        String tamano ;
+
+        if(esGrande()){
+            tamano = "GRANDE";
+        }
+        else{
+            tamano = "PEQUEÑA";
+        }
+
+        return  "DETALLES :"+
+                "\nESTADO -> "+estado+
+                "\nTAMAÑO ->"+tamano+
+                "\nPRECIO -> "+ precio+
+                "\nMETROS^2 -> "+ metrosCuadrados+
+                "\nDNI COMPRADOR ->"+dniComprador;
+    }
+
 
 
 }
