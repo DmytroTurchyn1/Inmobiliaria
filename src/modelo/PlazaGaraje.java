@@ -7,6 +7,7 @@ public class PlazaGaraje {
         LIBRE, VENDIDA;
     }
 
+
     //defino las variables
     double precio = 0;
     double metrosCuadrados = 0;
@@ -56,6 +57,60 @@ public class PlazaGaraje {
     public void setDniComprador(String dniComprador){
         this.dniComprador = dniComprador;
     }
+
+
+    //Hago metodos/funciones
+
+    public boolean esGrande(){
+        return metrosCuadrados > UMBRAL_GRANDE;
+    }
+
+    public boolean cumpleSuperficie(double supMax, double supMin){
+        if (metrosCuadrados < supMin && metrosCuadrados > supMax){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public static boolean cumplePrecio(double precioMax, double precioMin, double precio ){
+        return precio >= precioMin && precio <= precioMax;
+    }
+
+    public boolean cumpleTamano(int filtroTamano){
+        if (filtroTamano == 0){
+            return true;
+        }
+        if (filtroTamano == 1){
+            return !esGrande();
+        }
+        if (filtroTamano == 2){
+            return esGrande();
+        }
+        return false;
+
+    }
+
+    //metodos/funcion de transacciones
+
+    public boolean vender(String dniComprador){
+        if (dniComprador == null || dniComprador.isEmpty()){
+            return false;
+        }
+        else {
+            estado = Estado.VENDIDA;
+            this.dniComprador = dniComprador;
+            return true;
+        }
+    }
+
+    public void liberar(){
+        estado = Estado.LIBRE;
+        dniComprador = null;
+    }
+
+
 }
 
 
