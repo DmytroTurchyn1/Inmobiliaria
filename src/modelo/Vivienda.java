@@ -25,6 +25,7 @@ public class Vivienda {
         this.precio = precio;
         this.metrosCuadrados = metrosCuadrados;
         this.habitaciones = habitaciones;
+        this.estado = Estado_VIVIENDA.LIBRE;
     }
 
     public Estado_VIVIENDA getEstado() {
@@ -37,10 +38,10 @@ public class Vivienda {
 
     public double getPrecio() {
         return switch (calidad) {
-            case ESTANDAR -> precio;
+            case ESTANDAR -> this.precio;
             case PLUS -> precio * 1.05;
             case DE_LUXE -> precio * 1.10;
-            default -> precio;
+            case null -> precio;
         };
     }
 
@@ -76,16 +77,16 @@ public class Vivienda {
         this.habitaciones = habitaciones;
     }
 
-    public double getMetrosCuadrados() {
-        return metrosCuadrados;
-    }
-
     public void setMetrosCuadrados(double metrosCuadrados) {
         if (metrosCuadrados < 1) {
             System.out.println("ERROR: MetrosCuadrados tiene que ser mayor o igual a 1");
             return;
         }
         this.metrosCuadrados = metrosCuadrados;
+    }
+
+    public double getMetrosCuadrados() {
+        return metrosCuadrados;
     }
 
     public Calidad_VIVIENDA getCalidad() {
@@ -98,5 +99,68 @@ public class Vivienda {
 
     public double getPrecioBase() {
         return precio;
+    }
+
+
+    public boolean cumpleSuperficie(double metrosMin, double metrosMax) {
+        return metrosCuadrados > metrosMin && metrosCuadrados < metrosMax;
+    }
+
+    boolean cumplePrecio(double precioMin, double precioMax) {
+        return this.getPrecio() > precioMin && this.getPrecio() < precioMax;
+    }
+
+    public boolean cumpleHabitaciones(int habMin, int habMax) {
+        return this.habitaciones > habMin && habitaciones < habMax;
+    }
+
+    public boolean estaDisponible() {
+        return estado == Estado_VIVIENDA.LIBRE;
+    }
+
+    public boolean vender(String dni, Calidad_VIVIENDA calidad) {
+        if (!dni.isBlank() && dni != null) {
+            this.estado = Estado_VIVIENDA.VENDIDO;
+            this.calidad = calidad;
+            this.dniComprador = dni;
+            return true;
+        } else return false;
+    }
+
+    public boolean vender(String dni) {
+        return vender(dni, Calidad_VIVIENDA.ESTANDAR);
+    }
+
+    public void reservar(String dni, Calidad_VIVIENDA calidad) {
+        this.estado = Estado_VIVIENDA.RESERVADO;
+        this.dniComprador = dni;
+        this.calidad = calidad;
+    }
+
+    public void reservar(String dni) {
+        reservar(dni, Calidad_VIVIENDA.ESTANDAR);
+    }
+
+    public void liberar() {
+        this.estado = Estado_VIVIENDA.LIBRE;
+        this.dniComprador = null;
+        this.calidad = null;
+    }
+
+    @Override
+    public String toString() {
+        return switch (this.estado) {
+            case LIBRE -> "L";
+            case RESERVADO -> "R";
+            case VENDIDO -> "V";
+        };
+    }
+
+    public String getDetalles() {
+        return "\nHabitaciones: " + this.habitaciones +
+                "\nEstado: " + this +
+                "\nDNI: " + this.dniComprador +
+                "\nMetros Cuadrados: " + this.metrosCuadrados +
+                "\nPrecio: " + this.getPrecio();
     }
 }
