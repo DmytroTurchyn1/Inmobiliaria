@@ -33,8 +33,29 @@ public class PlazaGaraje {
         this.estado = estado;
     }
 
-    
+    public double getPrecio(){
+        return precio;
+    }
 
+    public void setPrecio(double precio){
+        this.precio = precio;
+    }
+
+    public double getMetrosCuadrados(){
+        return metrosCuadrados;
+    }
+
+    public void setMetrosCuadrados(double metrosCuadrados){
+        this.metrosCuadrados = metrosCuadrados;
+    }
+
+    public String getDniComprador() {
+        return dniComprador;
+    }
+
+    public void setDniComprador(String dniComprador){
+        this.dniComprador = dniComprador;
+    }
 }
 
 
