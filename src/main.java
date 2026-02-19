@@ -1,5 +1,5 @@
-public class main {
-    void main(String[] args) {
-        System.out.println("Hello Wkkkkorld");
+class Main {
+    void main() {
+        System.out.println("Inmobilaria");
     }
 }
