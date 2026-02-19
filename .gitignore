@@ -30,3 +30,5 @@ bin/
 .DS_Store
 
 .idea/copilot.data.migration.ask2agent.xml
+
+.idea/misc.xml
