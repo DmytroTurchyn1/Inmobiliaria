@@ -1,11 +1,12 @@
 package modelo;
 
-enum Estado_VIVIENDA {
+enum Estado {
     LIBRE,
     RESERVADO,
     VENDIDO
 }
-enum Calidad_VIVIENDA {
+
+enum Calidad {
     ESTANDAR,
     PLUS,
     DE_LUXE
@@ -14,25 +15,25 @@ enum Calidad_VIVIENDA {
 
 public class Vivienda {
 
-     Estado_VIVIENDA estado = Estado_VIVIENDA.RESERVADO;
+    Estado estado = Estado.RESERVADO;
      double precio;
      double metrosCuadrados;
      int habitaciones;
      String dniComprador = null;
-     Calidad_VIVIENDA calidad = null;
+    Calidad calidad = null;
 
     public Vivienda(double precio, double metrosCuadrados, int habitaciones) {
         this.precio = precio;
         this.metrosCuadrados = metrosCuadrados;
         this.habitaciones = habitaciones;
-        this.estado = Estado_VIVIENDA.LIBRE;
+        this.estado = Estado.LIBRE;
     }
 
-    public Estado_VIVIENDA getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(Estado_VIVIENDA estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
@@ -89,11 +90,11 @@ public class Vivienda {
         return metrosCuadrados;
     }
 
-    public Calidad_VIVIENDA getCalidad() {
+    public Calidad getCalidad() {
         return calidad;
     }
 
-    public void setCalidad(Calidad_VIVIENDA calidad) {
+    public void setCalidad(Calidad calidad) {
         this.calidad = calidad;
     }
 
@@ -115,12 +116,12 @@ public class Vivienda {
     }
 
     public boolean estaDisponible() {
-        return estado == Estado_VIVIENDA.LIBRE;
+        return estado == Estado.LIBRE;
     }
 
-    public boolean vender(String dni, Calidad_VIVIENDA calidad) {
+    public boolean vender(String dni, Calidad calidad) {
         if (!dni.isBlank() && dni != null) {
-            this.estado = Estado_VIVIENDA.VENDIDO;
+            this.estado = Estado.VENDIDO;
             this.calidad = calidad;
             this.dniComprador = dni;
             return true;
@@ -128,21 +129,21 @@ public class Vivienda {
     }
 
     public boolean vender(String dni) {
-        return vender(dni, Calidad_VIVIENDA.ESTANDAR);
+        return vender(dni, Calidad.ESTANDAR);
     }
 
-    public void reservar(String dni, Calidad_VIVIENDA calidad) {
-        this.estado = Estado_VIVIENDA.RESERVADO;
+    public void reservar(String dni, Calidad calidad) {
+        this.estado = Estado.RESERVADO;
         this.dniComprador = dni;
         this.calidad = calidad;
     }
 
     public void reservar(String dni) {
-        reservar(dni, Calidad_VIVIENDA.ESTANDAR);
+        reservar(dni, Calidad.ESTANDAR);
     }
 
     public void liberar() {
-        this.estado = Estado_VIVIENDA.LIBRE;
+        this.estado = Estado.LIBRE;
         this.dniComprador = null;
         this.calidad = null;
     }
