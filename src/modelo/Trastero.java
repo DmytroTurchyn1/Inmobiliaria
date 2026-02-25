@@ -1,113 +1,151 @@
 package modelo;
 
+
 public class Trastero {
 
-    enum Estado {LIBRE,VENDIDO;
-
-        public Estado libre() {
-        }
+    public enum Estado{
+        LIBRE, VENDIDO;
     }
+
+
+    // Atributos principales
     Estado estado;
     double precio;
     double metrosCuadrados;
     String dniComprador;
-    double UMBRAL_GRANDE=7.0;
+    double UMBRAL_GRANDE = 7.0;
 
 
-    public Trastero(double precio, double metrosCuadrados) {
-        this.estado=Estado.LIBRE;
-        this.dniComprador=null;
-        this.precio = precio;
+    // Constructor
+    public Trastero(double precio, double metrosCuadrados){
+        this.estado = Estado.LIBRE;
+        this.precio= precio;
         this.metrosCuadrados = metrosCuadrados;
+        this.dniComprador = null;
+
     }
 
-    public double getMetrosCuadrados() {
-        return metrosCuadrados;
+    //Getters y setters
+
+    public Estado getEstado(){
+        return estado;
     }
 
-    public double getPrecio() {
+    public void setEstado(Estado estado){
+        this.estado = estado;
+    }
+
+    public double getPrecio(){
         return precio;
     }
 
+    public void setPrecio(double precio){
+        this.precio = precio;
+    }
 
-    public Estado getEstado() {
-        return estado;
+    public double getMetrosCuadrados(){
+        return metrosCuadrados;
+    }
+
+    public void setMetrosCuadrados(double metrosCuadrados){
+        this.metrosCuadrados = metrosCuadrados;
     }
 
     public String getDniComprador() {
         return dniComprador;
     }
 
-    public void setDniComprador(String dniComprador) {
+    public void setDniComprador(String dniComprador){
         this.dniComprador = dniComprador;
     }
 
-    public void setEstado(Estado estado) {
-        this.estado = estado;
+
+    // Métodos de Consulta
+
+
+    public boolean esGrande(){ // ¿ Supera el umbral ?
+        return metrosCuadrados > UMBRAL_GRANDE;
     }
 
-    public void setMetrosCuadrados(double metrosCuadrados) {
-        this.metrosCuadrados = metrosCuadrados;
+    public boolean cumpleSuperficie(double supMin,double supMax){ // ¿ Superficie dentro del rango ?
+        return metrosCuadrados >= supMin && metrosCuadrados <= supMax;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    public boolean cumplePrecio(double precioMin,double precioMax ){ // ¿ Precio dentro del rango ?
+        return precio >= precioMin && precio <= precioMax;
     }
 
-
-
-    boolean esGrande(){
-        //*ver Verifica si la plaza supera el umbral de 7.0 m²
-        //• Retorna: boolean (true si metrosCuadrados > 7.0)*//
-        if (this.metrosCuadrados > UMBRAL_GRANDE){
+    public boolean cumpleTamano(int filtroTamano){ //
+        if (filtroTamano == 0){
             return true;
+        }
+        if (filtroTamano == 1){
+            return !esGrande(); // Plazas pequeñas
+        }
+        if (filtroTamano == 2){
+            return esGrande(); // Plazas grandes
+        }
+        return false;
+
+    }
+
+    public boolean estaDisponible(){
+        return this.estado == Estado.LIBRE;
+    }
+
+
+
+    // Métodos de Transacción
+
+    public boolean vender(String dniComprador){
+        if (dniComprador == null || dniComprador.isEmpty()){
+            return false;
+        }
+        else {
+            estado = Estado.VENDIDO;
+            this.dniComprador = dniComprador;
+            return true;
+        }
+    }
+
+    public void liberar(){
+        this.estado = Estado.LIBRE;
+        this.dniComprador = null;
+    }
+
+
+    // Métodos de Representación
+
+    @Override
+    public String toString() {
+        return switch (this.estado) {
+            case LIBRE -> "L";
+            case VENDIDO -> "V";
+        };
+    }
+
+    public String getDetalles() {
+        String tamano ;
+
+        if(esGrande()){
+            tamano = "GRANDE";
         }
         else{
-            return false;
+            tamano = "PEQUEÑA";
         }
-    }
-    Void cumpleSuperficie(double metrosMin,double metrosMax){
 
+        return  "DETALLES :"+
+                "\nESTADO -> "+estado+
+                "\nTAMAÑO ->"+tamano+
+                "\nPRECIO -> "+ precio+
+                "\nMETROS^2 -> "+ metrosCuadrados+
+                "\nDNI COMPRADOR ->"+dniComprador;
+    }
 
-    }
-    void cumplePrecio(double precioMin,double precioMax){
-
-    }
-    void cumpleTamano(int filtroTamano){
-        if(filtroTamano = 0){
-
-        }
-        if(filtroTamano = 1){
-
-        }
-        if (filtroTamano = 2){
-
-        }
-    }
-    Estado estaDisponible(){
-        if (this.estado=Estado.libre()){
-            return this.getEstado();
-        }
-        else {
-            return this.getEstado();
-        }
-    }
-    boolean vender(String dni){
-        if (dni!=null){
-            this.setEstado(Estado.VENDIDO);
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    void liberar(){
-        this.setEstado(Estado.LIBRE);
-        this.setDniComprador(null);
-    }
 
 
 }
+
 
 
 
