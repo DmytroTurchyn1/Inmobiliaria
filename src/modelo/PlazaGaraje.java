@@ -110,6 +110,10 @@ public class PlazaGaraje {
         dniComprador = null;
     }
 
+    public boolean estaDisponible(){
+        return estado == Estado.LIBRE;
+    }
+
 
     @Override
     public String toString() {
