@@ -12,7 +12,7 @@ public class PlazaGaraje {
     double precio = 0;
     double metrosCuadrados = 0;
     String dniComprador ;
-    double UMBRAL_GRANDE = 12;  //revisar
+    double UMBRAL_GRANDE = 12.0;
     Estado estado;
 
     //contructor
@@ -92,6 +92,8 @@ public class PlazaGaraje {
 
     }
 
+
+
     //metodos/funcion de transacciones
 
     public boolean vender(String dniComprador){
@@ -113,6 +115,8 @@ public class PlazaGaraje {
     public boolean estaDisponible(){
         return estado == Estado.LIBRE;
     }
+
+
 
 
     @Override
