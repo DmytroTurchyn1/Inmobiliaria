@@ -3,6 +3,7 @@
 <details>
 <summary> FASE 1: CLASES BÁSICAS </summary>
 <details>
+  
 <summary> 1. INTRODUCCIÓN </summary>
 
 ### 1.1. Descripción del Problema
@@ -33,8 +34,9 @@ Este documento describe la implementación de las clases básicas del sistema de
 - Crear métodos básicos de consulta y validación.
 - Implementar la funcionalidad de venta y liberación de propiedades.
 </details>
----
+
 <details>
+  
 <summary> 2. CLASE VIVIENDA </summary>
 
 ### 2.1. Estructura de la Clase
@@ -161,8 +163,9 @@ Los métodos getter y setter permiten el acceso controlado a los atributos de la
 - Si tiene calidad asignada, muestra el nombre de la calidad
 - Si está vendida/reservada, muestra el DNI del comprador
 </details>
----
+
 <details>
+  
 <summary> 3. CLASE PLAZAGARAJE </summary>
 
 ### 3.1. Estructura de la Clase
@@ -254,8 +257,9 @@ Métodos similares a los de Vivienda pero sin calidad ni habitaciones:
 - `toString()`: Retorna `'L'` o `'V'`
 - `getDetalles()`: Retorna información completa incluyendo si es grande o pequeña
 </details>
----
+
 <details>
+  
 <summary> 4. CLASE TRASTERO </summary>
 
 ### 4.1. Estructura de la Clase
@@ -289,8 +293,9 @@ Todos los métodos son idénticos a los de PlazaGaraje:
 - `vender()`, `liberar()`
 - `toString()`, `getDetalles()`
 </details>
----
+
 <details>
+  
 <summary> 5. ORDEN DE IMPLEMENTACIÓN </summary>
 
 ### 5.1. Paso 1: Crear la Estructura Básica
@@ -341,8 +346,9 @@ Todos los métodos son idénticos a los de PlazaGaraje:
 - Implementar `toString()` con `@Override`
 - Implementar `getDetalles()`
 </details>
----
+
 <details>
+  
 <summary> 6. PUNTOS CLAVE DE ESTA FASE </summary>
 
 ### 6.1. Conceptos Importantes
