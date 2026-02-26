@@ -1,19 +1,19 @@
 package modelo;
 
-enum Estado {
-    LIBRE,
-    RESERVADO,
-    VENDIDO
-}
-
-enum Calidad {
-    ESTANDAR,
-    PLUS,
-    DE_LUXE
-
-}
-
 public class Vivienda {
+
+    enum Estado {
+        LIBRE,
+        RESERVADO,
+        VENDIDO
+    }
+
+    enum Calidad {
+        ESTANDAR,
+        PLUS,
+        DE_LUXE
+
+    }
 
     Estado estado = Estado.RESERVADO;
      double precio;
