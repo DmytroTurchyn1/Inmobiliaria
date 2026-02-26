@@ -66,12 +66,7 @@ public class PlazaGaraje {
     }
 
     public boolean cumpleSuperficie(double supMax, double supMin){
-        if (metrosCuadrados >= supMin && metrosCuadrados <= supMax){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return metrosCuadrados >= supMin && metrosCuadrados <= supMax;
     }
 
     public boolean cumplePrecio(double precioMax, double precioMin ){
