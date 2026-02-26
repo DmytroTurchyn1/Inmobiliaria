@@ -1,8 +1,9 @@
 # Fundamentos de Programación II — Curso 2025/2026
 # SISTEMA DE GESTIÓN DE UNA PROMOTORA INMOBILIARIA
-## FASE 1: CLASES BÁSICAS
-
-## 1. INTRODUCCIÓN
+<details>
+<summary> FASE 1: CLASES BÁSICAS </summary>
+<details>
+<summary> 1. INTRODUCCIÓN </summary>
 
 ### 1.1. Descripción del Problema
 
@@ -31,10 +32,10 @@ Este documento describe la implementación de las clases básicas del sistema de
 - Desarrollar métodos getter y setter para acceso controlado a los atributos.
 - Crear métodos básicos de consulta y validación.
 - Implementar la funcionalidad de venta y liberación de propiedades.
-
+</details>
 ---
-
-## 2. CLASE VIVIENDA
+<details>
+<summary> 2. CLASE VIVIENDA </summary>
 
 ### 2.1. Estructura de la Clase
 
@@ -159,10 +160,10 @@ Los métodos getter y setter permiten el acceso controlado a los atributos de la
 - Incluye: estado, precio (con calidad), superficie, habitaciones
 - Si tiene calidad asignada, muestra el nombre de la calidad
 - Si está vendida/reservada, muestra el DNI del comprador
-
+</details>
 ---
-
-## 3. CLASE PLAZAGARAJE
+<details>
+<summary> 3. CLASE PLAZAGARAJE </summary>
 
 ### 3.1. Estructura de la Clase
 
@@ -252,10 +253,10 @@ Métodos similares a los de Vivienda pero sin calidad ni habitaciones:
 
 - `toString()`: Retorna `'L'` o `'V'`
 - `getDetalles()`: Retorna información completa incluyendo si es grande o pequeña
-
+</details>
 ---
-
-## 4. CLASE TRASTERO
+<details>
+<summary> 4. CLASE TRASTERO </summary>
 
 ### 4.1. Estructura de la Clase
 
@@ -287,10 +288,10 @@ Todos los métodos son idénticos a los de PlazaGaraje:
 - `estaDisponible()`
 - `vender()`, `liberar()`
 - `toString()`, `getDetalles()`
-
+</details>
 ---
-
-## 5. ORDEN DE IMPLEMENTACIÓN
+<details>
+<summary> 5. ORDEN DE IMPLEMENTACIÓN </summary>
 
 ### 5.1. Paso 1: Crear la Estructura Básica
 
@@ -339,10 +340,10 @@ Todos los métodos son idénticos a los de PlazaGaraje:
 
 - Implementar `toString()` con `@Override`
 - Implementar `getDetalles()`
-
+</details>
 ---
-
-## 6. PUNTOS CLAVE DE ESTA FASE
+<details>
+<summary> 6. PUNTOS CLAVE DE ESTA FASE </summary>
 
 ### 6.1. Conceptos Importantes
 
@@ -357,3 +358,5 @@ Una vez completadas estas tres clases básicas, en la siguiente fase se implemen
 - Clase `Edificio`: contendrá arrays de viviendas, plazas y trasteros
 - Métodos de inicialización y generación aleatoria
 - Visualización del estado del edificio
+</details>
+</details>
