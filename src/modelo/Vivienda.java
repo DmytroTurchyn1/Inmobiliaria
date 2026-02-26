@@ -15,18 +15,20 @@ public class Vivienda {
 
     }
 
-    Estado estado = Estado.RESERVADO;
+    Estado estado;
      double precio;
      double metrosCuadrados;
      int habitaciones;
-     String dniComprador = null;
-    Calidad calidad = null;
+    String dniComprador;
+    Calidad calidad;
 
     public Vivienda(double precio, double metrosCuadrados, int habitaciones) {
         this.precio = precio;
         this.metrosCuadrados = metrosCuadrados;
         this.habitaciones = habitaciones;
         this.estado = Estado.LIBRE;
+        this.dniComprador = null;
+        this.calidad = null;
     }
 
     public Estado getEstado() {
