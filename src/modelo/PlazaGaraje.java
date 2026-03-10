@@ -88,7 +88,6 @@ public class PlazaGaraje {
     }
 
 
-
     //metodos/funcion de transacciones
 
     public boolean vender(String dniComprador){
@@ -127,8 +126,7 @@ public class PlazaGaraje {
 
         if(esGrande()){
             tamano = "GRANDE";
-        }
-        else{
+        } else{
             tamano = "PEQUEÑA";
         }
 
@@ -139,9 +137,6 @@ public class PlazaGaraje {
                 "\nMETROS^2 -> "+ metrosCuadrados+
                 "\nDNI COMPRADOR ->"+dniComprador;
     }
-
-
-
 }
 
 

@@ -129,8 +129,7 @@ public class Trastero {
 
         if(esGrande()){
             tamano = "GRANDE";
-        }
-        else{
+        } else{
             tamano = "PEQUEÑA";
         }
 
@@ -141,9 +140,6 @@ public class Trastero {
                 "\nMETROS^2 -> "+ metrosCuadrados+
                 "\nDNI COMPRADOR ->"+dniComprador;
     }
-
-
-
 }
 
 

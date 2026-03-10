@@ -122,26 +122,37 @@ public class Vivienda {
     }
 
     public boolean vender(String dni, Calidad calidad) {
-        if (!dni.isBlank() && dni != null) { // Comprueba que no está vacío ni nulo
+        if (dni == null || dni.isEmpty()){
+            return false;
+        } else {
             this.estado = Estado.VENDIDO;
             this.calidad = calidad;
             this.dniComprador = dni;
             return true;
-        } else return false;
+        }
     }
 
     public boolean vender(String dni) {
-        return vender(dni, Calidad.ESTANDAR);
+        if (dni == null || dni.isEmpty()){
+            return false;
+        } else return vender(dni, Calidad.ESTANDAR);
     }
 
-    public void reservar(String dni, Calidad calidad) {
-        this.estado = Estado.RESERVADO;
-        this.dniComprador = dni;
-        this.calidad = calidad;
+    public boolean reservar(String dni, Calidad calidad) {
+        if (dni == null || dni.isEmpty()){
+            return false;
+        } else {
+            this.estado = Estado.RESERVADO;
+            this.dniComprador = dni;
+            this.calidad = calidad;
+            return true;
+        }
     }
 
-    public void reservar(String dni) {
-        reservar(dni, Calidad.ESTANDAR);
+    public boolean reservar(String dni) {
+        if (dni == null || dni.isEmpty()){
+         return false;
+        } else return reservar(dni, Calidad.ESTANDAR);
     }
 
     public void liberar() {
