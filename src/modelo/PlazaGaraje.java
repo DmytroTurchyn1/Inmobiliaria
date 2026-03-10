@@ -4,7 +4,7 @@ public class PlazaGaraje {
 
     //Enumero el estado
     public enum Estado{
-        LIBRE, VENDIDA;
+        LIBRE, VENDIDO;
     }
 
 
@@ -65,11 +65,11 @@ public class PlazaGaraje {
         return metrosCuadrados > UMBRAL_GRANDE;
     }
 
-    public boolean cumpleSuperficie(double supMax, double supMin){
+    public boolean cumpleSuperficie(double supMin, double supMax){
         return metrosCuadrados >= supMin && metrosCuadrados <= supMax;
     }
 
-    public boolean cumplePrecio(double precioMax, double precioMin ){
+    public boolean cumplePrecio(double precioMin, double precioMax ){
         return precio >= precioMin && precio <= precioMax;
     }
 
@@ -96,7 +96,7 @@ public class PlazaGaraje {
             return false;
         }
         else {
-            estado = Estado.VENDIDA;
+            estado = Estado.VENDIDO;
             this.dniComprador = dniComprador;
             return true;
         }
@@ -118,7 +118,7 @@ public class PlazaGaraje {
     public String toString() {
         return switch (this.estado) {
             case LIBRE -> "L";
-            case VENDIDA -> "V";
+            case VENDIDO -> "V";
         };
     }
 

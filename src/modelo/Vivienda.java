@@ -109,7 +109,7 @@ public class Vivienda {
         return metrosCuadrados > metrosMin && metrosCuadrados < metrosMax;
     }
 
-    boolean cumplePrecio(double precioMin, double precioMax) {
+    public boolean cumplePrecio(double precioMin, double precioMax) {
         return this.getPrecio() > precioMin && this.getPrecio() < precioMax;
     }
 
@@ -122,7 +122,7 @@ public class Vivienda {
     }
 
     public boolean vender(String dni, Calidad calidad) {
-        if (!dni.isBlank() && dni != null) {
+        if (!dni.isBlank() && dni != null) { // Comprueba que no está vacío ni nulo
             this.estado = Estado.VENDIDO;
             this.calidad = calidad;
             this.dniComprador = dni;
@@ -161,7 +161,8 @@ public class Vivienda {
 
     public String getDetalles() {
         return "\nHabitaciones: " + this.habitaciones +
-                "\nEstado: " + this +
+                "\nCalidad: " + this.calidad +
+                "\nEstado: " + this.estado +
                 "\nDNI: " + this.dniComprador +
                 "\nMetros Cuadrados: " + this.metrosCuadrados +
                 "\nPrecio: " + this.getPrecio();
