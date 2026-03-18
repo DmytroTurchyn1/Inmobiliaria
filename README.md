@@ -369,7 +369,8 @@ Una vez completadas estas tres clases básicas, en la siguiente fase se implemen
 
 ## Propuesta de issues y reparto entre 4 personas
 
-Para organizar el trabajo, se propone crear estos 4 issues en GitHub (uno por persona), cada uno con tareas concretas:
+Para organizar el trabajo, se propone crear estos 4 issues en GitHub (uno por persona), cada uno con tareas concretas.
+**Nota:** `Persona 1`, `Persona 2`, `Persona 3` y `Persona 4` son marcadores de posición; al crear los issues se deben sustituir por nombres reales o usuarios de GitHub.
 
 1. **Issue: Implementar clase `Edificio` (estructura base y generación de datos)**  
    **Responsable:** Persona 1  
