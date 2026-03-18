@@ -416,9 +416,12 @@ Antes de implementar esta clase, deben estar completadas las clases:
 
 - `PLANTAS_GARAJE = 2`: El garaje siempre tiene exactamente 2 plantas (sótano -1 y sótano -2)
 
----
+</details>
 
-## 3. CONSTRUCTOR E INICIALIZACIÓN
+<details>
+  
+<summary> 3. CONSTRUCTOR E INICIALIZACIÓN </summary>
+
 
 ### 3.1. Constructor Principal
 
@@ -477,9 +480,11 @@ public Edificio(String nombre, int numPlantas, int viviendasPorPlanta,
 - Precio: `1500` a `8000` euros
 - Metros cuadrados: `3` a `15` m²
 
----
+</details>
 
-## 4. MÉTODOS DE ACCESO BÁSICOS
+<details>
+  
+<summary> 4. MÉTODOS DE ACCESO BÁSICOS </summary>
 
 ### 4.1. Getters Generales
 
@@ -504,9 +509,12 @@ public Edificio(String nombre, int numPlantas, int viviendasPorPlanta,
 
 Los métodos `getPlazaGaraje(int sotano, int plaza)` y `getTrastero(int indice)` funcionan de manera similar.
 
----
+</details>
 
-## 5. MÉTODOS DE VISUALIZACIÓN
+<details>
+  
+<summary> 5. MÉTODOS DE VISUALIZACIÓN </summary>
+
 
 ### 5.1. `mostrarEstado()`
 
@@ -535,9 +543,11 @@ Las plantas `3` y `2` tienen `4` viviendas (una unión de viviendas cada una), e
 
 > En el PDF aparece una imagen de ejemplo con una salida completa por consola que muestra las tres secciones.
 
----
+</details>
 
-## 6. MÉTODOS DE CONTEO Y ESTADÍSTICAS
+<details>
+  
+<summary> 6. MÉTODOS DE CONTEO Y ESTADÍSTICAS </summary>
 
 Estos métodos proporcionan información cuantitativa sobre el estado del edificio.
 
@@ -555,9 +565,11 @@ Estos métodos proporcionan información cuantitativa sobre el estado del edific
 
 **Nota importante:** Los métodos de conteo e ingresos tienen versiones equivalentes para plazas de garaje y trasteros.
 
----
+</details>
 
-## 7. MÉTODOS DE BÚSQUEDA Y FILTRADO
+<details>
+  
+<summary> 7. MÉTODOS DE BÚSQUEDA Y FILTRADO </summary>
 
 Los métodos de búsqueda permiten encontrar propiedades que cumplan ciertos criterios.
 
@@ -601,9 +613,11 @@ Métodos análogos para plazas de garaje:
 
 Métodos análogos para trasteros (misma estructura que plazas de garaje).
 
----
+</details>
 
-## 8. OPERACIONES COMPLEJAS
+<details>
+  
+<summary> 8. OPERACIONES COMPLEJAS </summary>
 
 ### 8.1. Unión de Viviendas
 
@@ -647,9 +661,11 @@ La unión de trasteros funciona de manera muy similar a la unión de viviendas:
 - Crea nuevo trastero unido y lo marca como `VENDIDO`
 - Desplaza el array hacia la izquierda
 
----
+</details>
 
-## 9. MÉTODOS DE CONSULTA POR DNI
+<details>
+  
+<summary> 9. MÉTODOS DE CONSULTA POR DNI </summary>
 
 Estos métodos permiten encontrar todas las propiedades de un comprador específico.
 
@@ -670,10 +686,13 @@ Estos métodos permiten encontrar todas las propiedades de un comprador específ
 23. Recorrer todas las propiedades del tipo correspondiente
 24. Comparar el DNI usando `equalsIgnoreCase()` para no distinguir mayúsculas
 25. Mostrar o contar según corresponda
+    
+</details>
 
----
+<details>
+  
+<summary> 10. ORDEN DE IMPLEMENTACIÓN RECOMENDADO </summary>
 
-## 10. ORDEN DE IMPLEMENTACIÓN RECOMENDADO
 
 ### 10.1. Fase A: Estructura Básica
 
@@ -722,10 +741,10 @@ Estos métodos permiten encontrar todas las propiedades de un comprador específ
 47. Implementar `unirViviendas`  
 48. Implementar `puedenUnirseTrasteros`  
 49. Implementar `unirTrasteros`  
-
----
-
-## 11. PUNTOS CLAVE DE ESTA FASE
+</details>
+<details>
+  
+<summary> 11. PUNTOS CLAVE DE ESTA FASE </summary>
 
 ### 11.1. Conceptos Importantes
 
