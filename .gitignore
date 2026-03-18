@@ -30,3 +30,6 @@ bin/
 .DS_Store
 
 .idea/copilot.data.migration.ask2agent.xml
+
+### Java ###
+*.class
