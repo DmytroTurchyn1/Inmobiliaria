@@ -366,3 +366,399 @@ Una vez completadas estas tres clases básicas, en la siguiente fase se implemen
 - Visualización del estado del edificio
 </details>
 </details>
+<details>
+<summary> FASE 2: CLASE EDIFICIO </summary>
+<details>
+
+  
+<summary> 1. INTRODUCCIÓN </summary>
+
+Este documento describe la implementación de la clase Edificio, que representa el nivel
+intermedio de complejidad del sistema. Un edificio gestiona colecciones de viviendas,
+plazas de garaje y trasteros, utilizando las clases básicas desarrolladas en la Fase 1.
+
+## 1.1. Requisitos Previos
+
+Antes de implementar esta clase, deben estar completadas las clases:
+• Vivienda (con sus enums Estado y Calidad)
+• PlazaGaraje
+• Trastero
+
+## 1.2. Objetivos de esta Fase
+
+• Gestionar arrays bidimensionales (viviendas, garaje) y unidimensionales
+(trasteros)
+• Implementar métodos de inicialización y generación de datos
+• Crear visualizaciones del estado del edificio
+• Desarrollar funciones de búsqueda y filtrado
+• Implementar operaciones complejas como unión de propiedades
+</details>
+<details>
+  
+<summary> 2. ESTRUCTURA DE LA CLASE EDIFICIO </summary>
+
+## 2.1. Atributos Principales
+
+### 2.1. Atributos Principales
+
+| Atributo | Tipo | Descripción |
+|---|---|---|
+| `nombre` | `String` | Nombre del edificio |
+| `viviendas` | `Vivienda[][]` | Matriz bidimensional `[planta][puerta]` |
+| `numPlantas` | `int` | Número de plantas del edificio |
+| `viviendasPorPlanta` | `int` | Número de viviendas por planta |
+| `garaje` | `PlazaGaraje[][]` | Matriz bidimensional `[planta][plaza]` (2 plantas fijas) |
+| `plazasPorPlantaGaraje` | `int` | Número de plazas por planta de garaje |
+| `trasteros` | `Trastero[]` | Array unidimensional de trasteros |
+| `numTrasteros` | `int` | Número total de trasteros |
+
+### 2.2. Constantes
+
+- `PLANTAS_GARAJE = 2`: El garaje siempre tiene exactamente 2 plantas (sótano -1 y sótano -2)
+
+</details>
+
+<details>
+  
+<summary> 3. CONSTRUCTOR E INICIALIZACIÓN </summary>
+
+
+### 3.1. Constructor Principal
+
+**Sintaxis:**
+
+```java
+public Edificio(String nombre, int numPlantas, int viviendasPorPlanta,
+                int plazasPorPlantaGaraje, int numTrasteros)
+```
+
+**Acciones del constructor:**
+
+1. Asignar los parámetros a los atributos correspondientes
+2. Inicializar la matriz de viviendas: `new Vivienda[numPlantas][viviendasPorPlanta]`
+3. Inicializar la matriz del garaje: `new PlazaGaraje[2][plazasPorPlantaGaraje]`
+4. Inicializar el array de trasteros: `new Trastero[numTrasteros]`
+5. Llamar a `generarViviendasAleatorias()`
+6. Llamar a `generarGarajeAleatorio()`
+7. Llamar a `generarTrasterosAleatorios()`
+
+### 3.2. Generación Aleatoria Automática
+
+**IMPORTANTE:** El constructor llama automáticamente a los métodos de generación aleatoria. No es necesario inicializar con valores por defecto ni llamar manualmente a métodos de generación.
+
+#### 3.2.1. `generarViviendasAleatorias()`
+
+**Propósito:** Generar viviendas con características aleatorias realistas.
+
+**Lógica:**
+
+- Crear objeto `Random` con semilla `12345L`
+- Recorrer todas las plantas y puertas
+- Para cada posición, generar valores aleatorios dentro de rangos realistas
+
+**Rangos de valores:**
+
+- Precio: `80000 + (planta * 10000) + aleatorio(0-120000)` euros
+- Metros cuadrados: `40` a `180` m²
+- Habitaciones: `1` a `5`
+
+#### 3.2.2. `generarGarajeAleatorio()`
+
+**Propósito:** Generar plazas de garaje con características aleatorias.
+
+**Rangos de valores:**
+
+- Precio: `8000` a `30000` euros
+- Metros cuadrados: `8` a `20` m²
+
+#### 3.2.3. `generarTrasterosAleatorios()`
+
+**Propósito:** Generar trasteros con características aleatorias.
+
+**Rangos de valores:**
+
+- Precio: `1500` a `8000` euros
+- Metros cuadrados: `3` a `15` m²
+
+</details>
+
+<details>
+  
+<summary> 4. MÉTODOS DE ACCESO BÁSICOS </summary>
+
+### 4.1. Getters Generales
+
+- `getNombre()` / `setNombre(String)`: Obtiene/establece el nombre del edificio
+- `getNumPlantas()`: Retorna el número de plantas
+- `getViviendasPorPlanta()`: Retorna el número de viviendas por planta
+- `getPlantasGaraje()`: Retorna la constante `2`
+- `getPlazasPorPlantaGaraje()`: Retorna el número de plazas por planta
+- `getNumTrasteros()`: Retorna el número de trasteros
+
+### 4.2. Métodos de Acceso a Propiedades
+
+#### `getVivienda(int planta, int puerta)`
+
+- Valida que los índices estén dentro de los límites
+- Retorna la `Vivienda` en la posición especificada o `null` si no es válida
+
+#### `setVivienda(int planta, int puerta, Vivienda vivienda)`
+
+- Valida índices antes de asignar
+- Útil para operaciones de unión de viviendas
+
+Los métodos `getPlazaGaraje(int sotano, int plaza)` y `getTrastero(int indice)` funcionan de manera similar.
+
+</details>
+
+<details>
+  
+<summary> 5. MÉTODOS DE VISUALIZACIÓN </summary>
+
+
+### 5.1. `mostrarEstado()`
+
+**Propósito:** Mostrar una vista tabular de las viviendas del edificio.
+
+**Formato de salida:**
+
+- Título con nombre del edificio y leyenda
+- Cabecera con números de puerta
+- Plantas mostradas de arriba a abajo (de mayor a menor)
+- Estado de cada vivienda usando `toString()` → `L / R / V`
+
+Las plantas `3` y `2` tienen `4` viviendas (una unión de viviendas cada una), el resto tienen `5`.
+
+> En el PDF aparece una imagen de ejemplo con una salida por consola del estado del edificio.
+
+### 5.2. `mostrarMatrizEdificio()`
+
+**Propósito:** Mostrar una vista completa del edificio incluyendo viviendas, garaje y trasteros.
+
+**Incluye tres secciones:**
+
+8. **VIVIENDAS**: Matriz de plantas y puertas  
+9. **GARAJE**: Matriz de sótanos y plazas  
+10. **TRASTEROS**: Array lineal de trasteros  
+
+> En el PDF aparece una imagen de ejemplo con una salida completa por consola que muestra las tres secciones.
+
+</details>
+
+<details>
+  
+<summary> 6. MÉTODOS DE CONTEO Y ESTADÍSTICAS </summary>
+
+Estos métodos proporcionan información cuantitativa sobre el estado del edificio.
+
+### 6.1. Métodos de Conteo de Viviendas
+
+- `contarViviendasLibres()`: Cuenta viviendas en estado `LIBRE`
+- `contarViviendasReservadas()`: Cuenta viviendas en estado `RESERVADO`
+- `contarViviendasVendidas()`: Cuenta viviendas en estado `VENDIDO`
+- `getTotalViviendas()`: Cuenta todas las viviendas no nulas
+
+### 6.2. Métodos de Cálculo de Ingresos
+
+- `calcularIngresosPotenciales()`: Suma los precios de todas las viviendas (vendidas o no)
+- `calcularIngresosVendidos()`: Suma los precios solo de viviendas `VENDIDAS`
+
+**Nota importante:** Los métodos de conteo e ingresos tienen versiones equivalentes para plazas de garaje y trasteros.
+
+</details>
+
+<details>
+  
+<summary> 7. MÉTODOS DE BÚSQUEDA Y FILTRADO </summary>
+
+Los métodos de búsqueda permiten encontrar propiedades que cumplan ciertos criterios.
+
+### 7.1. Búsqueda de Viviendas por Criterio Individual
+
+#### `buscarViviendasPorSuperficie(double metrosMin, double metrosMax)`
+
+- Recorre todas las viviendas del edificio
+- Usa el método `cumpleSuperficie()` de cada vivienda
+- Muestra las que están disponibles y cumplen el criterio
+
+#### `buscarViviendasPorPrecio(double precioMin, double precioMax)`
+
+- Similar al anterior, pero filtra por precio
+
+#### `buscarViviendasPorHabitaciones(int habMin, int habMax)`
+
+- Filtra por número de habitaciones
+
+### 7.2. Búsqueda Combinada de Viviendas
+
+#### `buscarViviendas(double metrosMin, double metrosMax, double precioMin, double precioMax, int habMin, int habMax)`
+
+- Busca viviendas que cumplan **TODOS** los criterios simultáneamente
+- Usa los tres métodos `cumple...()` de la clase `Vivienda`
+
+### 7.3. Búsqueda de Plazas de Garaje
+
+Métodos análogos para plazas de garaje:
+
+- `buscarPlazasGarajePorSuperficie(metrosMin, metrosMax)`
+- `buscarPlazasGarajePorPrecio(precioMin, precioMax)`
+- `buscarPlazasGarajePorTamano(filtroTamano)`  
+  donde `filtroTamano` puede ser:
+  - `0` → todas
+  - `1` → pequeñas
+  - `2` → grandes
+- `buscarPlazasGaraje(...)` → búsqueda combinada
+
+### 7.4. Búsqueda de Trasteros
+
+Métodos análogos para trasteros (misma estructura que plazas de garaje).
+
+</details>
+
+<details>
+  
+<summary> 8. OPERACIONES COMPLEJAS </summary>
+
+### 8.1. Unión de Viviendas
+
+#### 8.1.1. `puedenUnirseViviendas(int planta, int puerta1, int puerta2)`
+
+**Propósito:** Verificar si dos viviendas pueden unirse.
+
+**Condiciones que deben cumplirse:**
+
+11. Las puertas deben ser contiguas: `|puerta1 - puerta2| == 1`
+12. Ambas viviendas deben existir (`no null`)
+13. Ambas deben estar disponibles (`estado LIBRE`)
+
+#### 8.1.2. `unirViviendas(int planta, int puerta1, int puerta2, String dni, Vivienda.Calidad calidad)`
+
+**Propósito:** Unir dos viviendas contiguas en una sola.
+
+**Proceso:**
+
+14. Asegurar que `puerta1 < puerta2` (intercambiar si es necesario)
+15. Verificar que pueden unirse (llamar a `puedenUnirseViviendas`)
+16. Sumar: precio, metros cuadrados y habitaciones de ambas viviendas
+17. Crear una nueva `Vivienda` con los valores sumados
+18. Vender la nueva vivienda al comprador con la calidad especificada
+19. Colocar la vivienda unida en `puerta1`
+20. Desplazar todas las viviendas a la izquierda a partir de `puerta2`
+21. Establecer la última posición en `null`
+22. Retornar `true` si todo fue exitoso
+
+### 8.2. Unión de Trasteros
+
+La unión de trasteros funciona de manera muy similar a la unión de viviendas:
+
+#### `puedenUnirseTrasteros(int trastero1, int trastero2)`
+
+- Verifica que sean contiguos y que ambos existan
+
+#### `unirTrasteros(int trastero1, int trastero2, String dniComprador)`
+
+- Suma precio y metros cuadrados
+- Crea nuevo trastero unido y lo marca como `VENDIDO`
+- Desplaza el array hacia la izquierda
+
+</details>
+
+<details>
+  
+<summary> 9. MÉTODOS DE CONSULTA POR DNI </summary>
+
+Estos métodos permiten encontrar todas las propiedades de un comprador específico.
+
+### 9.1. Métodos de Conteo
+
+- `contarViviendasPorDni(String dni)`: Cuenta cuántas viviendas tiene un comprador
+- `contarPlazasPorDni(String dni)`: Cuenta plazas de garaje del comprador
+- `contarTrasterosPorDni(String dni)`: Cuenta trasteros del comprador
+
+### 9.2. Métodos de Listado
+
+- `listarViviendasPorDni(String dni)`: Muestra detalles de todas las viviendas del comprador
+- `listarPlazasPorDni(String dni)`: Muestra detalles de plazas de garaje del comprador
+- `listarTrasterosPorDni(String dni)`: Muestra detalles de trasteros del comprador
+
+**Implementación típica:**
+
+23. Recorrer todas las propiedades del tipo correspondiente
+24. Comparar el DNI usando `equalsIgnoreCase()` para no distinguir mayúsculas
+25. Mostrar o contar según corresponda
+    
+</details>
+
+<details>
+  
+<summary> 10. ORDEN DE IMPLEMENTACIÓN RECOMENDADO </summary>
+
+
+### 10.1. Fase A: Estructura Básica
+
+26. Declarar la clase y los atributos  
+27. Implementar el constructor  
+28. Implementar métodos de generación aleatoria  
+29. Implementar getters básicos  
+
+### 10.2. Fase B: Acceso a Propiedades
+
+30. Implementar `getVivienda`, `getPlazaGaraje`, `getTrastero`  
+31. Implementar `setVivienda`  
+
+### 10.3. Fase C: Visualización
+
+32. Implementar `mostrarEstado` (solo viviendas)  
+33. Implementar `mostrarMatrizEdificio` (completo)  
+
+### 10.4. Fase D: Métodos de Conteo
+
+34. Implementar contadores de viviendas (libres, reservadas, vendidas, total)  
+35. Implementar contadores de plazas  
+36. Implementar contadores de trasteros  
+
+### 10.5. Fase E: Cálculo de Ingresos
+
+37. Implementar cálculos de ingresos para viviendas  
+38. Implementar cálculos para plazas  
+39. Implementar cálculos para trasteros  
+
+### 10.6. Fase F: Búsqueda y Filtrado
+
+40. Implementar búsquedas individuales de viviendas  
+41. Implementar búsqueda combinada de viviendas  
+42. Implementar búsquedas de plazas  
+43. Implementar búsquedas de trasteros  
+
+### 10.7. Fase G: Consultas por DNI
+
+44. Implementar contadores por DNI  
+45. Implementar listados por DNI  
+
+### 10.8. Fase H: Operaciones Complejas
+
+46. Implementar `puedenUnirseViviendas`  
+47. Implementar `unirViviendas`  
+48. Implementar `puedenUnirseTrasteros`  
+49. Implementar `unirTrasteros`  
+</details>
+<details>
+  
+<summary> 11. PUNTOS CLAVE DE ESTA FASE </summary>
+
+### 11.1. Conceptos Importantes
+
+- **Gestión de Arrays:** Manejo de matrices bidimensionales y arrays unidimensionales
+- **Validación de Índices:** Verificación de límites antes de acceder a arrays
+- **Desplazamiento de Arrays:** Técnica para eliminar elementos manteniendo el orden
+
+### 11.2. Próxima Fase
+
+Una vez completada la clase `Edificio`, en la siguiente fase se implementará:
+
+- **Clase `Promotora`**: gestiona múltiples edificios
+- Operaciones a nivel de promotora
+- **Clase `Main`**: interfaz de usuario
+
+</details>
+</details>
