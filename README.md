@@ -366,6 +366,43 @@ Una vez completadas estas tres clases básicas, en la siguiente fase se implemen
 - Visualización del estado del edificio
 </details>
 </details>
+
+## Propuesta de issues y reparto entre 4 personas
+
+Para organizar el trabajo, se propone crear estos 4 issues en GitHub (uno por persona), cada uno con tareas concretas.
+**Nota:** `Persona 1`, `Persona 2`, `Persona 3` y `Persona 4` son marcadores de posición; al crear los issues se deben sustituir por nombres reales o usuarios de GitHub.
+
+1. **Issue: Implementar clase `Edificio` (estructura base y generación de datos)**  
+   **Responsable:** Persona 1  
+   **Tareas:**
+   - [ ] Crear clase `Edificio` con atributos principales (`nombre`, `viviendas`, `garaje`, `trasteros`).
+   - [ ] Implementar constructor y validaciones básicas.
+   - [ ] Implementar generación aleatoria de viviendas, garaje y trasteros.
+   - [ ] Añadir getters/setters iniciales.
+
+2. **Issue: Visualización, conteo e ingresos del edificio**  
+   **Responsable:** Persona 2  
+   **Tareas:**
+   - [ ] Implementar `mostrarEstado()`.
+   - [ ] Implementar `mostrarMatrizEdificio()`.
+   - [ ] Implementar contadores de viviendas/plazas/trasteros por estado.
+   - [ ] Implementar cálculos de ingresos potenciales y vendidos.
+
+3. **Issue: Búsquedas y filtros de propiedades**  
+   **Responsable:** Persona 3  
+   **Tareas:**
+   - [ ] Implementar búsquedas de viviendas por superficie, precio y habitaciones.
+   - [ ] Implementar búsqueda combinada de viviendas.
+   - [ ] Implementar búsquedas de plazas de garaje por superficie, precio y tamaño.
+   - [ ] Implementar búsquedas de trasteros equivalentes.
+
+4. **Issue: Consultas por DNI y operaciones complejas**  
+   **Responsable:** Persona 4  
+   **Tareas:**
+   - [ ] Implementar conteos y listados por DNI para viviendas, plazas y trasteros.
+   - [ ] Implementar validaciones para unir viviendas/trasteros contiguos.
+   - [ ] Implementar `unirViviendas(...)` y `unirTrasteros(...)`.
+   - [ ] Revisar casos límite y coherencia de estados tras las uniones.
 <details>
 <summary> FASE 2: CLASE EDIFICIO </summary>
 <details>
