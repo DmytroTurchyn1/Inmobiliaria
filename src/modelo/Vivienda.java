@@ -2,13 +2,13 @@ package modelo;
 
 public class Vivienda {
 
-    enum Estado {
+    public enum Estado {
         LIBRE,
         RESERVADO,
         VENDIDO
     }
 
-    enum Calidad {
+    public enum Calidad {
         ESTANDAR,
         PLUS,
         DE_LUXE
