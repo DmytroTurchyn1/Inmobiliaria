@@ -55,6 +55,10 @@ public class PlazaGaraje {
     }
 
     public void setDniComprador(String dniComprador){
+        if (dniComprador == null || dniComprador.isEmpty()) {
+            System.out.println("ERROR: DNI no puede ser null");
+            return;
+        }
         this.dniComprador = dniComprador;
     }
 
@@ -131,11 +135,12 @@ public class PlazaGaraje {
         }
 
         return  "DETALLES :"+
-                "\nESTADO -> "+estado+
-                "\nTAMAÑO ->"+tamano+
-                "\nPRECIO -> "+ precio+
-                "\nMETROS^2 -> "+ metrosCuadrados+
-                "\nDNI COMPRADOR ->"+dniComprador;
+                "\nEstado -> "+estado +
+                "\nTamano ->"+ tamano +
+                "\nPrecio -> "+ precio +
+                "\nMetros^2 -> "+ metrosCuadrados+
+                "\nDni comprador ->"+dniComprador +
+                "\n";
     }
 }
 

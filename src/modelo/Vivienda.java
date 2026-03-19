@@ -61,7 +61,7 @@ public class Vivienda {
     }
 
     public void setDniComprador(String dniComprador) {
-        if (dniComprador == null) {
+        if (dniComprador == null || dniComprador.isEmpty()) {
             System.out.println("ERROR: DNI no puede ser null");
             return;
         }
@@ -176,6 +176,8 @@ public class Vivienda {
                 "\nEstado: " + this.estado +
                 "\nDNI: " + this.dniComprador +
                 "\nMetros Cuadrados: " + this.metrosCuadrados +
-                "\nPrecio: " + this.getPrecio();
+                "\nPrecio: " + this.getPrecio() +
+                "\n";
+
     }
 }

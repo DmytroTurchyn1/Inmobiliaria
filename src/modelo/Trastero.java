@@ -56,6 +56,10 @@ public class Trastero {
     }
 
     public void setDniComprador(String dniComprador){
+        if (dniComprador == null || dniComprador.isEmpty()) {
+            System.out.println("ERROR: DNI no puede ser null");
+            return;
+        }
         this.dniComprador = dniComprador;
     }
 
