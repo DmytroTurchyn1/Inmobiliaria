@@ -5,7 +5,7 @@ import java.util.Random;
 public class Edificio {
 
     private static final long SEMILLA = 12345L;
-    public final int PLANTAS_GARAJE = 2;
+    public static final int PLANTAS_GARAJE = 2;
     private final Random rand = new Random(SEMILLA);
     public String nombre;
     public Vivienda[][] viviendas;
@@ -31,6 +31,81 @@ public class Edificio {
         generarViviendasAleatorias();
         generarGarajeAleatorio();
         generarTrasterosAleatorios();
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        if (nombre.isEmpty()) {
+            System.out.println("ERROR: Nombre no puede ser vacío");
+            return;
+        }
+        this.nombre = nombre;
+    }
+
+    public int getNumPlantas() {
+        return numPlantas;
+    }
+
+    public int getViviendasPorPlanta() {
+        return viviendasPorPlanta;
+    }
+
+    public int getPlantasGaraje() {
+        return PLANTAS_GARAJE;
+    }
+
+    public int getPlazasPorPlantaGaraje() {
+        return plazasPorPlantaGaraje;
+    }
+
+    public int getNumTrasteros() {
+        return numTrasteros;
+    }
+
+    public Vivienda getVivienda(int planta, int puerta) {
+        if (planta < 0 || puerta < 0 || planta >= numPlantas || puerta >= viviendasPorPlanta) {
+            System.out.println("ERROR: Planta o puerta no esta valida");
+            return null;
+        }
+        for (int i = 0; i <= planta; i++) {
+            if (this.viviendasPorPlanta == planta && this.viviendas[i][puerta] != null) {
+                return this.viviendas[planta][puerta];
+            }
+        }
+        System.out.println("ERROR: Vivienda no existe");
+        return null;
+    }
+
+    public PlazaGaraje getPlazaGaraje(int sotano, int plaza) {
+        if (sotano < 0 || plaza < 0 || plaza >= this.plazasPorPlantaGaraje || sotano >= PLANTAS_GARAJE) {
+            System.out.println("ERROR: sótano o plaza no están validos");
+            return null;
+        }
+        if (garaje[sotano][plaza] == null) {
+            System.out.println("ERROR: Garaje no existe");
+        }
+        return this.garaje[sotano][plaza];
+    }
+
+    public Trastero getTrastero(int indice) {
+        if (indice < 0 || indice >= this.numTrasteros || this.trasteros[indice] == null) {
+            System.out.println("ERROR: Trastero no existe");
+            return null;
+        }
+        return this.trasteros[indice];
+    }
+
+    public void setVivienda(int planta, int puerta, Vivienda vivienda) {
+        if (this.getVivienda(planta, puerta) != null &&
+                (planta >= this.numPlantas || planta < 0) &&
+                (puerta >= this.viviendasPorPlanta || puerta < 0)) {
+            System.out.println("ERROR: Vivienda existe en esta puerta o planta o puerta no están validas");
+            return;
+        }
+        viviendas[planta][puerta] = vivienda;
     }
 
     public void mostrarEstado() {
@@ -119,67 +194,23 @@ public class Edificio {
 
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getNumPlantas() {
-        return numPlantas;
-    }
-
-    public int getViviendasPorPlanta() {
-        return viviendasPorPlanta;
-    }
-
-    public int getPlantasGaraje() {
-        return 2;
-    }
-
-    public int getPlazasPorPlantaGaraje() {
-        return plazasPorPlantaGaraje;
-    }
-
-    public int getNumTrasteros() {
-        return numTrasteros;
-    }
-
-    public Vivienda getVivienda(int planta, int puerta) {
-        for (int i = 0; i < planta; i++) {
-            if (this.viviendasPorPlanta == planta) {
-                return this.viviendas[planta][puerta];
-            } else {
-                System.out.println("ERROR: Vivienda no existe");
-                break;
-            }
-        }
-        return null;
-    }
-
-    public void setVivienda(int planta, int puerta, Vivienda vivienda) {
-
-    }
-
     public void generarViviendasAleatorias() {
         for (int i = 0; i < viviendas.length; i++) {
-            for (int j = 0; j < viviendas[1].length; j++) {
+            for (int j = 0; j < viviendas[0].length; j++) {
                 viviendas[i][j] = new Vivienda(
-                        80000 + (i * 10000) + rand.nextInt(0, 12000),
-                        rand.nextInt(40, 100),
-                        rand.nextInt(1, 5));
+                        80000 + (i * 10000) + rand.nextInt(0, 120001),
+                        rand.nextInt(40, 181),
+                        rand.nextInt(1, 6));
             }
         }
     }
 
     public void generarGarajeAleatorio() {
         for (int i = 0; i < garaje.length; i++) {
-            for (int j = 0; j < garaje[1].length; j++) {
+            for (int j = 0; j < garaje[0].length; j++) {
                 garaje[i][j] = new PlazaGaraje(
-                        rand.nextInt(8000, 30000),
-                        rand.nextInt(8, 20));
+                        rand.nextInt(8000, 30001),
+                        rand.nextInt(8, 21));
             }
         }
     }
@@ -187,10 +218,8 @@ public class Edificio {
     private void generarTrasterosAleatorios() {
         for (int i = 0; i < trasteros.length; i++) {
             trasteros[i] = new Trastero(
-                    rand.nextInt(1500, 8000),
-                    rand.nextInt(3, 15));
+                    rand.nextInt(1500, 8001),
+                    rand.nextInt(3, 16));
         }
     }
-
-
 }
