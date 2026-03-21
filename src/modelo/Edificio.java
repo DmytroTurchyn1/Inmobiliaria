@@ -340,6 +340,7 @@ public class Edificio {
         return ingresoPotencialesTrasteros;
     }
 
+
     public double calculoTrasterosVendidos(){
         double ingresoTrasterosVendidos = 0;
 
