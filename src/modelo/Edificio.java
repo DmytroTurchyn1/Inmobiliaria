@@ -21,7 +21,7 @@ public class Edificio {
 
         System.out.println(" ");
 
-        for(int planta = numPlantas; planta >= 0; planta--){
+        for(int planta = numPlantas - 1; planta >= 0; planta--){
             System.out.println("Planta"+planta);
 
             for (int puerta = 0; puerta < viviendasPorPlanta; puerta++){
@@ -30,19 +30,23 @@ public class Edificio {
                 if(vivienda != null){
                     switch (vivienda.estado) {
                         case LIBRE:
-                            System.out.println("[L]");
+                            System.out.print("[L]");
                             break;
                         case RESERVADO:
-                            System.out.println("[R]");
+                            System.out.print("[R]");
                             break;
                         case VENDIDO:
-                            System.out.println("[V]");
+                            System.out.print("[V]");
                             break;
                     };
 
                 }
 
+
             }
+
+            System.out.println();
+
         }
 
     }
@@ -56,23 +60,24 @@ public class Edificio {
         }
 
 
-        for (int planta = 1; planta < 2; planta++) {
+        for (int planta = 0; planta < 2; planta++) {
 
-            System.out.println("Sotano "+(planta-2));
+            System.out.println("Sotano -"+(planta+1));
             for(int plaza = 0; plaza < plazasPorPlantaGaraje; plaza++){
                 PlazaGaraje plazaGaraje = garaje[planta][plaza];
                 if(plazaGaraje != null){
                     switch (plazaGaraje.estado) {
                         case LIBRE:
-                            System.out.println("[L]");
+                            System.out.print("[L]");
                             break;
                         case VENDIDO:
-                            System.out.println("[V]");
+                            System.out.print("[V]");
                             break;
                     };
                 }
 
             }
+            System.out.println();
         }
 
         System.out.println("[TRASTERO]");
@@ -80,20 +85,22 @@ public class Edificio {
             System.out.printf("   T"+(i+1));
         }
 
-        for(int plaza = 0; plaza < plazasPorPlantaGaraje; plaza++){
+        for(int plaza = 0; plaza < numTrasteros; plaza++){
             Trastero trastero = trasteros[plaza];
             if(trastero != null){
                 switch (trastero.estado) {
                     case LIBRE:
-                        System.out.println("[L]");
+                        System.out.print("[L]");
                         break;
                     case VENDIDO:
-                        System.out.println("[V]");
+                        System.out.print("[V]");
                         break;
                 }
             }
 
+
         }
+        System.out.println();
 
 
 
