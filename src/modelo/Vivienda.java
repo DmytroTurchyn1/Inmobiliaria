@@ -161,6 +161,8 @@ public class Vivienda {
         this.calidad = null;
     }
 
+
+
     @Override
     public String toString() {
         return switch (this.estado) {
