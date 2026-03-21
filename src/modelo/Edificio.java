@@ -353,7 +353,5 @@ public class Edificio {
         return ingresoTrasterosVendidos;
     }
 
-
-
 }
 
