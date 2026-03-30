@@ -314,7 +314,6 @@ public class Edificio {
         return plazasGarajeLibres;
     }
 
-
     public int getTotalTrasteros(){
         int numTotalTrasteros = 0;
 
@@ -478,5 +477,181 @@ public class Edificio {
                     rand.nextInt(3, 16));
         }
     }
+
+    // Union viviendas
+    public boolean puedenUnirseViviendas(int planta, int puerta1, int puerta2) {
+        if (puerta1 - puerta2 == 1) {
+            if (getVivienda(planta, puerta1) != null && getVivienda(planta, puerta2) != null) {
+                if (getVivienda(planta, puerta1).estaDisponible() && getVivienda(planta, puerta2).estaDisponible()) {
+                    return true;
+                }
+            }
+
+        }
+        return false;
+    }
+    public boolean unirViviendas(int planta, int puerta1, int puerta2, String dni, Vivienda.Calidad calidad){
+        if (puerta1 >= puerta2){
+            puerta1 = puerta2;
+            puerta2 = puerta1;
+        } else{
+            if (puedenUnirseViviendas(planta, puerta1, puerta2)){
+                double precionuevo = getVivienda(planta, puerta1).getPrecio() + getVivienda(planta, puerta2).getPrecio();
+                double metrosnuevo = getVivienda(planta, puerta1).getMetrosCuadrados() + getVivienda(planta, puerta2).getMetrosCuadrados();
+                int habnuevo= getVivienda(planta, puerta1).getHabitaciones() + getVivienda(planta, puerta2).getHabitaciones();
+
+                new Vivienda (precionuevo,metrosnuevo,habnuevo);
+                //(dni, getVivienda(planta,puerta1).calidad);
+
+            }
+        }
+
+
+
+        return true;
+    }
+
+    // Union trasteros
+    public boolean puedenUnirseTrasteros(int trastero1, int trastero2){
+        if (trastero1 - trastero2 == 1) {
+            if (getTrastero(trastero1) != null && getTrastero(trastero2) != null) {
+                if (getTrastero(trastero1).estaDisponible() && getTrastero(trastero2).estaDisponible()) {
+                    return true;
+                }
+            }
+
+        }
+        return false;
+    }
+    public boolean unirTrasteros(int trastero1, int trastero2, String dniComprador){
+        if (puedenUnirseTrasteros(trastero1,trastero2)){
+            double precionuevo = getTrastero(trastero1).getPrecio() + getTrastero(trastero2).getPrecio();
+            double metrosnuevo = getTrastero(trastero1).getMetrosCuadrados() + getTrastero(trastero2).getMetrosCuadrados();
+            new Trastero (precionuevo,metrosnuevo);
+
+
+        }
+
+        return true;
+    }
+
+    // Metodos de Conteo
+    public int contarViviendasPorDni(String dni) {
+        int contar = 0;
+        if (dni == null || dni.isEmpty()) {
+            return 0;
+        } else {
+            for (int i = 0; i < viviendas.length; i++) {
+                for (int j = 0; j < viviendas[0].length; j++) {
+                    if (viviendas[i][j] != null) {
+                        if(viviendas[i][j].getEstado() == Vivienda.Estado.VENDIDO && dni.equalsIgnoreCase(viviendas[i][j].getDniComprador())){
+                            contar += 1;
+                        }
+                    }
+                }
+            }
+        }
+        return contar;
+    }
+
+    public int contarPlazasPorDni(String dni){
+        int contar = 0;
+        if (dni == null || dni.isEmpty()) {
+            return 0;
+        } else {
+            for (int i = 0; i < garaje.length; i++) {
+                for (int j = 0; j < garaje[0].length; j++) {
+                    if (garaje[i][j] != null) {
+                        if(garaje[i][j].getEstado() == PlazaGaraje.Estado.VENDIDO && dni.equalsIgnoreCase(garaje[i][j].getDniComprador())){
+                            contar += 1;
+                        }
+                    }
+                }
+            }
+        }
+        return contar;
+
+    }
+
+    public int contarTrasterosPorDni(String dni){
+        int contar = 0;
+        if (dni == null || dni.isEmpty()) {
+            return 0;
+        } else {
+            for (int i = 0; i < trasteros.length; i++) {
+                if (trasteros[i] != null) {
+                    if(trasteros[i].getEstado() == Trastero.Estado.VENDIDO && dni.equalsIgnoreCase(trasteros[i].getDniComprador())) {
+                        contar += 1;
+                    }
+                }
+            }
+        }
+        return contar;
+    }
+
+    // Metodos de Listado
+    public String listarViviendasPorDni(String dni) {
+        String detalles="";
+        if (dni == null || dni.isEmpty()) {
+            return "Dni no valido";
+        } else {
+            for (int i = 0; i < viviendas.length; i++) {
+                for (int j = 0; j < viviendas[0].length; j++) {
+                    if (viviendas[i][j] != null) {
+                        if (viviendas[i][j].getEstado() == Vivienda.Estado.VENDIDO && dni.equalsIgnoreCase(viviendas[i][j].getDniComprador())) {
+                            detalles += viviendas[i][j].getDetalles();
+                        }
+                    }
+                }
+            }
+            if (detalles.isEmpty()){
+                detalles = "No hay detalles";
+            }
+            return detalles;
+        }
+    }
+
+    public String listarPlazasPorDni(String dni){
+        String detalles="";
+        if (dni == null || dni.isEmpty()) {
+            return "Dni no valido";
+        } else {
+            for (int i = 0; i < garaje.length; i++) {
+                for (int j = 0; j < garaje[0].length; j++) {
+                    if (garaje[i][j] != null) {
+                        if (garaje[i][j].getEstado() == PlazaGaraje.Estado.VENDIDO && dni.equalsIgnoreCase(garaje[i][j].getDniComprador())) {
+                            detalles += garaje[i][j].getDetalles();
+                        }
+                    }
+                }
+            }
+            if (detalles.isEmpty()){
+                detalles = "No hay detalles";
+            }
+            return detalles;
+        }
+    }
+
+    public String listarTrasterosPorDni(String dni) {
+        String detalles = "";
+        if (dni == null || dni.isEmpty()) {
+            return "Dni no valido";
+        } else {
+            for (int i = 0; i < trasteros.length; i++) {
+                if (trasteros[i] != null) {
+                    if (trasteros[i].getEstado() == Trastero.Estado.VENDIDO && dni.equalsIgnoreCase(trasteros[i].getDniComprador())) {
+                        detalles += trasteros[i].getDetalles();
+                    }
+                }
+            }
+            if (detalles.isEmpty()) {
+                detalles = "No hay detalles";
+            }
+            return detalles;
+
+        }
+    }
+
+
 }
 
