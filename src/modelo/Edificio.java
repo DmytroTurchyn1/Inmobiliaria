@@ -478,6 +478,298 @@ public class Edificio {
         }
     }
 
+    // 7.1 Búsqueda de viviendas por superficie
+    public void buscarViviendasPorSuperficie(double metrosMin, double metrosMax) {
+        System.out.println("\n=== Viviendas con superficie entre " + metrosMin + " y " + metrosMax + " m2 ===");
+        boolean encontrada = false;
+
+        for (int planta = 0; planta < numPlantas; planta++) {
+            for (int puerta = 0; puerta < viviendasPorPlanta; puerta++) {
+                Vivienda v = viviendas[planta][puerta];
+                if (v != null && v.getMetrosCuadrados() >= metrosMin && v.getMetrosCuadrados() <= metrosMax) {
+                    System.out.println("Planta " + planta + ", Puerta " + puerta + ": " + v);
+                    encontrada = true;
+                }
+            }
+        }
+
+        if (!encontrada) {
+            System.out.println("No se encontraron viviendas que cumplan el criterio.");
+        }
+    }
+
+    // 7.1 Búsqueda de viviendas por precio
+    public void buscarViviendasPorPrecio(double precioMin, double precioMax) {
+        System.out.println("\n=== Viviendas con precio entre " + precioMin + " y " + precioMax + " € ===");
+        boolean encontrada = false;
+
+        for (int planta = 0; planta < numPlantas; planta++) {
+            for (int puerta = 0; puerta < viviendasPorPlanta; puerta++) {
+                Vivienda v = viviendas[planta][puerta];
+                if (v != null && v.getPrecio() >= precioMin && v.getPrecio() <= precioMax) {
+                    System.out.println("Planta " + planta + ", Puerta " + puerta + ": " + v);
+                    encontrada = true;
+                }
+            }
+        }
+
+        if (!encontrada) {
+            System.out.println("No se encontraron viviendas que cumplan el criterio.");
+        }
+    }
+
+    // 7.1 Búsqueda de viviendas por habitaciones
+    public void buscarViviendasPorHabitaciones(int habMin, int habMax) {
+        System.out.println("\n=== Viviendas con " + habMin + " a " + habMax + " habitaciones ===");
+        boolean encontrada = false;
+
+        for (int planta = 0; planta < numPlantas; planta++) {
+            for (int puerta = 0; puerta < viviendasPorPlanta; puerta++) {
+                Vivienda v = viviendas[planta][puerta];
+                if (v != null && v.getHabitaciones() >= habMin && v.getHabitaciones() <= habMax) {
+                    System.out.println("Planta " + planta + ", Puerta " + puerta + ": " + v);
+                    encontrada = true;
+                }
+            }
+        }
+
+        if (!encontrada) {
+            System.out.println("No se encontraron viviendas que cumplan el criterio.");
+        }
+    }
+
+    // 7.2 Búsqueda combinada de viviendas
+    public void buscarViviendas(double metrosMin, double metrosMax, double precioMin, double precioMax, int habMin, int habMax) {
+        System.out.println("\n=== Búsqueda combinada de viviendas ===");
+        System.out.println("Criterios:");
+        System.out.println("  - Superficie: " + metrosMin + " - " + metrosMax + " m2");
+        System.out.println("  - Precio: " + precioMin + " - " + precioMax + " €");
+        System.out.println("  - Habitaciones: " + habMin + " - " + habMax);
+        System.out.println("Resultados:");
+
+        boolean encontrada = false;
+
+        for (int planta = 0; planta < numPlantas; planta++) {
+            for (int puerta = 0; puerta < viviendasPorPlanta; puerta++) {
+                Vivienda v = viviendas[planta][puerta];
+                if (v != null &&
+                        v.getMetrosCuadrados() >= metrosMin && v.getMetrosCuadrados() <= metrosMax &&
+                        v.getPrecio() >= precioMin && v.getPrecio() <= precioMax &&
+                        v.getHabitaciones() >= habMin && v.getHabitaciones() <= habMax) {
+                    System.out.println("Planta " + planta + ", Puerta " + puerta + ": " + v);
+                    encontrada = true;
+                }
+            }
+        }
+
+        if (!encontrada) {
+            System.out.println("No se encontraron viviendas que cumplan todos los criterios.");
+        }
+    }
+
+    // 7.3 Búsqueda de plazas de garaje por superficie
+    public void buscarPlazasGarajePorSuperficie(double metrosMin, double metrosMax) {
+        System.out.println("\n=== Plazas de garaje con superficie entre " + metrosMin + " y " + metrosMax + " m2 ===");
+        boolean encontrada = false;
+
+        for (int sotano = 0; sotano < PLANTAS_GARAJE; sotano++) {
+            for (int plaza = 0; plaza < plazasPorPlantaGaraje; plaza++) {
+                PlazaGaraje p = garaje[sotano][plaza];
+                if (p != null && p.getMetrosCuadrados() >= metrosMin && p.getMetrosCuadrados() <= metrosMax) {
+                    System.out.println("Sótano " + (sotano + 1) + ", Plaza " + plaza + ": " + p);
+                    encontrada = true;
+                }
+            }
+        }
+
+        if (!encontrada) {
+            System.out.println("No se encontraron plazas que cumplan el criterio.");
+        }
+    }
+
+    // 7.3 Búsqueda de plazas de garaje por precio
+    public void buscarPlazasGarajePorPrecio(double precioMin, double precioMax) {
+        System.out.println("\n=== Plazas de garaje con precio entre " + precioMin + " y " + precioMax + " € ===");
+        boolean encontrada = false;
+
+        for (int sotano = 0; sotano < PLANTAS_GARAJE; sotano++) {
+            for (int plaza = 0; plaza < plazasPorPlantaGaraje; plaza++) {
+                PlazaGaraje p = garaje[sotano][plaza];
+                if (p != null && p.getPrecio() >= precioMin && p.getPrecio() <= precioMax) {
+                    System.out.println("Sótano " + (sotano + 1) + ", Plaza " + plaza + ": " + p);
+                    encontrada = true;
+                }
+            }
+        }
+
+        if (!encontrada) {
+            System.out.println("No se encontraron plazas que cumplan el criterio.");
+        }
+    }
+
+    // 7.3 Búsqueda de plazas de garaje por tamaño (0: todas, 1: pequeñas, 2: grandes)
+    public void buscarPlazasGarajePorTamano(int filtroTamano) {
+        String tipo = "";
+        if (filtroTamano == 0) {
+            tipo = "TODAS";
+        } else if (filtroTamano == 1) {
+            tipo = "PEQUEÑAS (< 12 m2)";
+        } else if (filtroTamano == 2) {
+            tipo = "GRANDES (>= 12 m2)";
+        }
+
+        System.out.println("\n=== Plazas de garaje " + tipo + " ===");
+        boolean encontrada = false;
+
+        for (int sotano = 0; sotano < PLANTAS_GARAJE; sotano++) {
+            for (int plaza = 0; plaza < plazasPorPlantaGaraje; plaza++) {
+                PlazaGaraje p = garaje[sotano][plaza];
+                if (p != null) {
+                    double metros = p.getMetrosCuadrados();
+                    if (filtroTamano == 0) {
+                        System.out.println("Sótano " + (sotano + 1) + ", Plaza " + plaza + ": " + p);
+                        encontrada = true;
+                    } else if (filtroTamano == 1 && metros < 12) {
+                        System.out.println("Sótano " + (sotano + 1) + ", Plaza " + plaza + ": " + p);
+                        encontrada = true;
+                    } else if (filtroTamano == 2 && metros >= 12) {
+                        System.out.println("Sótano " + (sotano + 1) + ", Plaza " + plaza + ": " + p);
+                        encontrada = true;
+                    }
+                }
+            }
+        }
+
+        if (!encontrada) {
+            System.out.println("No se encontraron plazas que cumplan el criterio.");
+        }
+    }
+
+    // 7.3 Búsqueda combinada de plazas de garaje
+    public void buscarPlazasGaraje(double metrosMin, double metrosMax, double precioMin, double precioMax) {
+        System.out.println("\n=== Búsqueda combinada de plazas de garaje ===");
+        System.out.println("Criterios:");
+        System.out.println("  - Superficie: " + metrosMin + " - " + metrosMax + " m2");
+        System.out.println("  - Precio: " + precioMin + " - " + precioMax + " €");
+        System.out.println("Resultados:");
+
+        boolean encontrada = false;
+
+        for (int sotano = 0; sotano < PLANTAS_GARAJE; sotano++) {
+            for (int plaza = 0; plaza < plazasPorPlantaGaraje; plaza++) {
+                PlazaGaraje p = garaje[sotano][plaza];
+                if (p != null &&
+                        p.getMetrosCuadrados() >= metrosMin && p.getMetrosCuadrados() <= metrosMax &&
+                        p.getPrecio() >= precioMin && p.getPrecio() <= precioMax) {
+                    System.out.println("Sótano " + (sotano + 1) + ", Plaza " + plaza + ": " + p);
+                    encontrada = true;
+                }
+            }
+        }
+
+        if (!encontrada) {
+            System.out.println("No se encontraron plazas que cumplan todos los criterios.");
+        }
+    }
+
+    // 7.4 Búsqueda de trasteros por superficie
+    public void buscarTrasterosPorSuperficie(double metrosMin, double metrosMax) {
+        System.out.println("\n=== Trasteros con superficie entre " + metrosMin + " y " + metrosMax + " m2 ===");
+        boolean encontrada = false;
+
+        for (int i = 0; i < numTrasteros; i++) {
+            Trastero t = trasteros[i];
+            if (t != null && t.getMetrosCuadrados() >= metrosMin && t.getMetrosCuadrados() <= metrosMax) {
+                System.out.println("Trastero " + i + ": " + t);
+                encontrada = true;
+            }
+        }
+
+        if (!encontrada) {
+            System.out.println("No se encontraron trasteros que cumplan el criterio.");
+        }
+    }
+
+    // 7.4 Búsqueda de trasteros por precio
+    public void buscarTrasterosPorPrecio(double precioMin, double precioMax) {
+        System.out.println("\n=== Trasteros con precio entre " + precioMin + " y " + precioMax + " € ===");
+        boolean encontrada = false;
+
+        for (int i = 0; i < numTrasteros; i++) {
+            Trastero t = trasteros[i];
+            if (t != null && t.getPrecio() >= precioMin && t.getPrecio() <= precioMax) {
+                System.out.println("Trastero " + i + ": " + t);
+                encontrada = true;
+            }
+        }
+
+        if (!encontrada) {
+            System.out.println("No se encontraron trasteros que cumplan el criterio.");
+        }
+    }
+
+    // 7.4 Búsqueda de trasteros por tamaño (0: todos, 1: pequeños, 2: grandes)
+    public void buscarTrasterosPorTamano(int filtroTamano) {
+        String tipo = "";
+        if (filtroTamano == 0) {
+            tipo = "TODOS";
+        } else if (filtroTamano == 1) {
+            tipo = "PEQUEÑOS (< 8 m2)";
+        } else if (filtroTamano == 2) {
+            tipo = "GRANDES (>= 8 m2)";
+        }
+
+        System.out.println("\n=== Trasteros " + tipo + " ===");
+        boolean encontrada = false;
+
+        for (int i = 0; i < numTrasteros; i++) {
+            Trastero t = trasteros[i];
+            if (t != null) {
+                double metros = t.getMetrosCuadrados();
+                if (filtroTamano == 0) {
+                    System.out.println("Trastero " + i + ": " + t);
+                    encontrada = true;
+                } else if (filtroTamano == 1 && metros < 8) {
+                    System.out.println("Trastero " + i + ": " + t);
+                    encontrada = true;
+                } else if (filtroTamano == 2 && metros >= 8) {
+                    System.out.println("Trastero " + i + ": " + t);
+                    encontrada = true;
+                }
+            }
+        }
+
+        if (!encontrada) {
+            System.out.println("No se encontraron trasteros que cumplan el criterio.");
+        }
+    }
+
+    // 7.4 Búsqueda combinada de trasteros
+    public void buscarTrasteros(double metrosMin, double metrosMax, double precioMin, double precioMax) {
+        System.out.println("\n=== Búsqueda combinada de trasteros ===");
+        System.out.println("Criterios:");
+        System.out.println("  - Superficie: " + metrosMin + " - " + metrosMax + " m2");
+        System.out.println("  - Precio: " + precioMin + " - " + precioMax + " €");
+        System.out.println("Resultados:");
+
+        boolean encontrada = false;
+
+        for (int i = 0; i < numTrasteros; i++) {
+            Trastero t = trasteros[i];
+            if (t != null &&
+                    t.getMetrosCuadrados() >= metrosMin && t.getMetrosCuadrados() <= metrosMax &&
+                    t.getPrecio() >= precioMin && t.getPrecio() <= precioMax) {
+                System.out.println("Trastero " + i + ": " + t);
+                encontrada = true;
+            }
+        }
+
+        if (!encontrada) {
+            System.out.println("No se encontraron trasteros que cumplan todos los criterios.");
+        }
+    }
+
+
     // Union viviendas
     public boolean puedenUnirseViviendas(int planta, int puerta1, int puerta2) {
         if (puerta1 - puerta2 == 1 || puerta2 - puerta1 == 1) {
