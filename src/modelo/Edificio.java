@@ -38,7 +38,7 @@ public class Edificio {
     }
 
     public void setNombre(String nombre) {
-        if (nombre.isEmpty()) {
+        if (nombre == null || nombre.isEmpty()) {
             System.out.println("ERROR: Nombre no puede ser vacío");
             return;
         }
@@ -196,7 +196,6 @@ public class Edificio {
 
 
         }
-        System.out.println();
 
     }
 
@@ -208,7 +207,7 @@ public class Edificio {
                 Vivienda vivienda = viviendas[planta][puerta];
 
                 if (vivienda != null) {
-                    contadorTotViviendas = contadorTotViviendas + 1;
+                    contadorTotViviendas++;
 
                 }
 
@@ -226,7 +225,7 @@ public class Edificio {
                 Vivienda vivienda = viviendas[planta][puerta];
 
                 if (vivienda != null && vivienda.estado == Vivienda.Estado.LIBRE) {
-                    contadorVivLibres = contadorVivLibres + 1;
+                    contadorVivLibres++;
                 }
             }
         }
@@ -242,7 +241,7 @@ public class Edificio {
                 Vivienda vivienda = viviendas[planta][puerta];
 
                 if (vivienda != null && vivienda.estado == Vivienda.Estado.RESERVADO) {
-                    contadorVivReservadas = contadorVivReservadas + 1;
+                    contadorVivReservadas++;
                 }
             }
         }
@@ -258,7 +257,7 @@ public class Edificio {
                 Vivienda vivienda = viviendas[planta][puerta];
 
                 if (vivienda != null && vivienda.estado == Vivienda.Estado.VENDIDO) {
-                    contadorVivVendidas = contadorVivVendidas + 1;
+                    contadorVivVendidas++;
                 }
             }
         }
@@ -274,7 +273,7 @@ public class Edificio {
                 PlazaGaraje plazaGaraje = garaje[planta][plazas];
 
                 if (plazaGaraje != null) {
-                    totalPlazasGaraje = totalPlazasGaraje + 1;
+                    totalPlazasGaraje++;
                 }
             }
         }
@@ -290,7 +289,7 @@ public class Edificio {
                 PlazaGaraje plazaGaraje = garaje[planta][plazas];
 
                 if (plazaGaraje != null && plazaGaraje.estado == PlazaGaraje.Estado.VENDIDO) {
-                    plazasGarajeVendidas = plazasGarajeVendidas + 1;
+                    plazasGarajeVendidas++;
                 }
             }
         }
@@ -306,7 +305,7 @@ public class Edificio {
                 PlazaGaraje plazaGaraje = garaje[planta][plazas];
 
                 if (plazaGaraje != null && plazaGaraje.estado == PlazaGaraje.Estado.LIBRE) {
-                    plazasGarajeLibres = plazasGarajeLibres + 1;
+                    plazasGarajeLibres++;
                 }
             }
         }
@@ -320,7 +319,7 @@ public class Edificio {
         for (int puerta = 0; puerta < numTrasteros; puerta++) {
             Trastero trastero = trasteros[puerta];
             if (trastero != null) {
-                numTotalTrasteros = numTotalTrasteros + 1;
+                numTotalTrasteros++;
             }
         }
 
@@ -333,7 +332,7 @@ public class Edificio {
         for (int puerta = 0; puerta < numTrasteros; puerta++) {
             Trastero trastero = trasteros[puerta];
             if (trastero != null && trastero.estado == Trastero.Estado.VENDIDO) {
-                trasterosVendidos = trasterosVendidos + 1;
+                trasterosVendidos++;
             }
         }
 
@@ -346,7 +345,7 @@ public class Edificio {
         for (int puerta = 0; puerta < numTrasteros; puerta++) {
             Trastero trastero = trasteros[puerta];
             if (trastero != null && trastero.estado == Trastero.Estado.LIBRE) {
-                trasterosLibres = trasterosLibres + 1;
+                trasterosLibres++;
             }
         }
 
@@ -364,7 +363,7 @@ public class Edificio {
                 Vivienda vivienda = viviendas[planta][puerta];
 
                 if (vivienda != null) {
-                    ingresoPotencial = ingresoPotencial + vivienda.getPrecio();
+                    ingresoPotencial += vivienda.getPrecio();
                 }
 
             }
@@ -382,7 +381,7 @@ public class Edificio {
                 Vivienda vivienda = viviendas[planta][puerta];
 
                 if (vivienda != null && vivienda.estado == Vivienda.Estado.VENDIDO) {
-                    ingresoVivVendidas = ingresoVivVendidas + vivienda.getPrecio();
+                    ingresoVivVendidas += vivienda.getPrecio();
                 }
             }
         }
@@ -391,22 +390,22 @@ public class Edificio {
     }
 
     public double calculoIngresoPotencialPlazaGaraje() {
-        double ingresoPotencialPlazGaraje = 0;
+        double ingresoPotencialPlazaGaraje = 0;
 
         for (int planta = 0; planta < 2; planta++) {
             for (int plazas = 0; plazas < plazasPorPlantaGaraje; plazas++) {
                 PlazaGaraje plazaGaraje = garaje[planta][plazas];
 
                 if (plazaGaraje != null) {
-                    ingresoPotencialPlazGaraje = ingresoPotencialPlazGaraje + plazaGaraje.getPrecio();
+                    ingresoPotencialPlazaGaraje += plazaGaraje.getPrecio();
                 }
             }
         }
 
-        return ingresoPotencialPlazGaraje;
+        return ingresoPotencialPlazaGaraje;
     }
 
-    public double calculoIngresosVendidosPlazGaraj() {
+    public double calculoIngresosVendidosPlazaGaraje() {
         double ingresoVendidosPLazas = 0;
 
         for (int planta = 0; planta < 2; planta++) {
@@ -414,7 +413,7 @@ public class Edificio {
                 PlazaGaraje plazaGaraje = garaje[planta][plazas];
 
                 if (plazaGaraje != null && plazaGaraje.estado == PlazaGaraje.Estado.VENDIDO) {
-                    ingresoVendidosPLazas = ingresoVendidosPLazas + plazaGaraje.getPrecio();
+                    ingresoVendidosPLazas += plazaGaraje.getPrecio();
                 }
             }
         }
@@ -428,7 +427,7 @@ public class Edificio {
         for (int puerta = 0; puerta < numTrasteros; puerta++) {
             Trastero trastero = trasteros[puerta];
             if (trastero != null) {
-                ingresoPotencialesTrasteros = ingresoPotencialesTrasteros + trastero.getPrecio();
+                ingresoPotencialesTrasteros += trastero.getPrecio();
             }
         }
 
@@ -442,7 +441,7 @@ public class Edificio {
         for (int puerta = 0; puerta < numTrasteros; puerta++) {
             Trastero trastero = trasteros[puerta];
             if (trastero != null && trastero.estado == Trastero.Estado.VENDIDO) {
-                ingresoTrasterosVendidos = ingresoTrasterosVendidos + trastero.getPrecio();
+                ingresoTrasterosVendidos += trastero.getPrecio();
             }
         }
 
@@ -774,9 +773,8 @@ public class Edificio {
     public boolean puedenUnirseViviendas(int planta, int puerta1, int puerta2) {
         if (puerta1 - puerta2 == 1 || puerta2 - puerta1 == 1) {
             if (getVivienda(planta, puerta1) != null && getVivienda(planta, puerta2) != null) {
-                if (getVivienda(planta, puerta1).estaDisponible() && getVivienda(planta, puerta2).estaDisponible()) {
-                    return true;
-                }
+                return getVivienda(planta, puerta1).estaDisponible() &&
+                        getVivienda(planta, puerta2).estaDisponible();
             }
 
         }
@@ -791,23 +789,23 @@ public class Edificio {
         }
         if (puedenUnirseViviendas(planta, puerta1, puerta2)) {
             // Guardamos en variables la suma del precio metros cuadrados y habitaciones
-            double precionuevo = getVivienda(planta, puerta1).getPrecio() + getVivienda(planta, puerta2).getPrecio();
-            double metrosnuevo = getVivienda(planta, puerta1).getMetrosCuadrados()
+            double precioNuevo = getVivienda(planta, puerta1).getPrecio() + getVivienda(planta, puerta2).getPrecio();
+            double metrosNuevo = getVivienda(planta, puerta1).getMetrosCuadrados()
                     + getVivienda(planta, puerta2).getMetrosCuadrados();
-            int habnuevo = getVivienda(planta, puerta1).getHabitaciones()
+            int habNuevo = getVivienda(planta, puerta1).getHabitaciones()
                     + getVivienda(planta, puerta2).getHabitaciones();
 
             // Nueva vivienda con características nuevas y venta al comprador
-            Vivienda nueva = new Vivienda(precionuevo, metrosnuevo, habnuevo);
+            Vivienda nueva = new Vivienda(precioNuevo, metrosNuevo, habNuevo);
             nueva.vender(dni, calidad);
             setVivienda(planta, puerta1, nueva); // Vivienda unida en puerta
 
             //20. Desplazar todas las viviendas a la izquierda a partir de puerta2
             // Guardo la vivienda a partir de puerta 2
             for (int i = puerta2; i < viviendas[planta].length - 1; i++) {
-                viviendas[planta][i] = viviendas[planta][i + 1]; //Guardo en la posicion actual la vivienda siguiente
+                viviendas[planta][i] = viviendas[planta][i + 1]; //Guardo en la posición actual la vivienda siguiente
             }
-            viviendas[planta][viviendas[planta].length - 1] = null; // Null en la ultima posicion despues de desplazar
+            viviendas[planta][viviendas[planta].length - 1] = null; // Null en la última posición después de desplazar
             return true;
         } else return false;
     }
@@ -816,9 +814,7 @@ public class Edificio {
     public boolean puedenUnirseTrasteros(int trastero1, int trastero2) {
         if (trastero1 - trastero2 == 1 || trastero2 - trastero1 == 1) {
             if (getTrastero(trastero1) != null && getTrastero(trastero2) != null) {
-                if (getTrastero(trastero1).estaDisponible() && getTrastero(trastero2).estaDisponible()) {
-                    return true;
-                }
+                return getTrastero(trastero1).estaDisponible() && getTrastero(trastero2).estaDisponible();
             }
 
         }
@@ -832,25 +828,23 @@ public class Edificio {
             trastero1 = aux;
         }
         if (puedenUnirseTrasteros(trastero1, trastero2)) {
-            double precionuevo = getTrastero(trastero1).getPrecio() + getTrastero(trastero2).getPrecio();
-            double metrosnuevo = getTrastero(trastero1).getMetrosCuadrados() + getTrastero(trastero2).getMetrosCuadrados();
+            double precioNuevo = getTrastero(trastero1).getPrecio() + getTrastero(trastero2).getPrecio();
+            double metrosNuevo = getTrastero(trastero1).getMetrosCuadrados() + getTrastero(trastero2).getMetrosCuadrados();
 
-            Trastero nuevo = new Trastero(precionuevo, metrosnuevo);
+            Trastero nuevo = new Trastero(precioNuevo, metrosNuevo);
             nuevo.vender(dniComprador);
             trasteros[trastero1] = nuevo;
 
             for (int i = trastero2; i < trasteros.length - 1; i++) {
-                trasteros[i] = trasteros[i + 1]; //Guardo en la posicion actual la vivienda siguiente
+                trasteros[i] = trasteros[i + 1]; //Guardo en la posición actual la vivienda siguiente
             }
-            trasteros[trasteros.length - 1] = null; // Null en la ultima posicion despues de desplazar
+            trasteros[trasteros.length - 1] = null; // Null en la última posición después de desplazar
             return true;
         } else return false;
     }
 
 
-
-
-    // Metodos de Conteo
+    // Métodos de Conteo
     public int contarViviendasPorDni(String dni) {
         int contar = 0;
         if (dni == null || dni.isEmpty()) {
@@ -858,10 +852,10 @@ public class Edificio {
         } else {
             for (int i = 0; i < viviendas.length; i++) {
                 for (int j = 0; j < viviendas[0].length; j++) {
-                    if (viviendas[i][j] != null) {
-                        if(viviendas[i][j].getEstado() == Vivienda.Estado.VENDIDO && dni.equalsIgnoreCase(viviendas[i][j].getDniComprador())){
-                            contar += 1;
-                        }
+                    if (viviendas[i][j] != null &&
+                            viviendas[i][j].getEstado() == Vivienda.Estado.VENDIDO &&
+                            dni.equalsIgnoreCase(viviendas[i][j].getDniComprador())) {
+                        contar++;
                     }
                 }
             }
@@ -869,17 +863,17 @@ public class Edificio {
         return contar;
     }
 
-    public int contarPlazasPorDni(String dni){
+    public int contarPlazasPorDni(String dni) {
         int contar = 0;
         if (dni == null || dni.isEmpty()) {
             return 0;
         } else {
             for (int i = 0; i < garaje.length; i++) {
                 for (int j = 0; j < garaje[0].length; j++) {
-                    if (garaje[i][j] != null) {
-                        if(garaje[i][j].getEstado() == PlazaGaraje.Estado.VENDIDO && dni.equalsIgnoreCase(garaje[i][j].getDniComprador())){
-                            contar += 1;
-                        }
+                    if (garaje[i][j] != null &&
+                            garaje[i][j].getEstado() == PlazaGaraje.Estado.VENDIDO &&
+                            dni.equalsIgnoreCase(garaje[i][j].getDniComprador())) {
+                        contar++;
                     }
                 }
             }
@@ -888,25 +882,27 @@ public class Edificio {
 
     }
 
-    public int contarTrasterosPorDni(String dni){
+    public int contarTrasterosPorDni(String dni) {
         int contar = 0;
+
         if (dni == null || dni.isEmpty()) {
             return 0;
-        } else {
-            for (int i = 0; i < trasteros.length; i++) {
-                if (trasteros[i] != null) {
-                    if(trasteros[i].getEstado() == Trastero.Estado.VENDIDO && dni.equalsIgnoreCase(trasteros[i].getDniComprador())) {
-                        contar += 1;
-                    }
-                }
+        }
+
+        for (int i = 0; i < trasteros.length; i++) {
+            if (trasteros[i] != null &&
+                    trasteros[i].getEstado() == Trastero.Estado.VENDIDO &&
+                    dni.equalsIgnoreCase(trasteros[i].getDniComprador())) {
+                contar++;
             }
         }
+
         return contar;
     }
 
-    // Metodos de Listado
+    // Métodos de Listado
     public String listarViviendasPorDni(String dni) {
-        String detalles="";
+        StringBuilder detalles = new StringBuilder();
         if (dni == null || dni.isEmpty()) {
             return "Dni no valido";
         } else {
@@ -914,59 +910,57 @@ public class Edificio {
                 for (int j = 0; j < viviendas[0].length; j++) {
                     if (viviendas[i][j] != null) {
                         if (viviendas[i][j].getEstado() == Vivienda.Estado.VENDIDO && dni.equalsIgnoreCase(viviendas[i][j].getDniComprador())) {
-                            detalles += viviendas[i][j].getDetalles();
+                            detalles.append(viviendas[i][j].getDetalles());
                         }
-                    }
-                }
-            }
-            if (detalles.isEmpty()){
-                detalles = "No hay detalles";
-            }
-            return detalles;
-        }
-    }
-
-    public String listarPlazasPorDni(String dni){
-        String detalles="";
-        if (dni == null || dni.isEmpty()) {
-            return "Dni no valido";
-        } else {
-            for (int i = 0; i < garaje.length; i++) {
-                for (int j = 0; j < garaje[0].length; j++) {
-                    if (garaje[i][j] != null) {
-                        if (garaje[i][j].getEstado() == PlazaGaraje.Estado.VENDIDO && dni.equalsIgnoreCase(garaje[i][j].getDniComprador())) {
-                            detalles += garaje[i][j].getDetalles();
-                        }
-                    }
-                }
-            }
-            if (detalles.isEmpty()){
-                detalles = "No hay detalles";
-            }
-            return detalles;
-        }
-    }
-
-    public String listarTrasterosPorDni(String dni) {
-        String detalles = "";
-        if (dni == null || dni.isEmpty()) {
-            return "Dni no valido";
-        } else {
-            for (int i = 0; i < trasteros.length; i++) {
-                if (trasteros[i] != null) {
-                    if (trasteros[i].getEstado() == Trastero.Estado.VENDIDO && dni.equalsIgnoreCase(trasteros[i].getDniComprador())) {
-                        detalles += trasteros[i].getDetalles();
                     }
                 }
             }
             if (detalles.isEmpty()) {
-                detalles = "No hay detalles";
+                detalles = new StringBuilder("No hay detalles");
             }
-            return detalles;
-
+            return detalles.toString();
         }
     }
 
+    public String listarPlazasPorDni(String dni) {
+        StringBuilder detalles = new StringBuilder();
+        if (dni == null || dni.isEmpty()) {
+            return "Dni no valido";
+        }
+        for (int i = 0; i < garaje.length; i++) {
+            for (int j = 0; j < garaje[0].length; j++) {
+                if (garaje[i][j] != null &&
+                        garaje[i][j].getEstado() == PlazaGaraje.Estado.VENDIDO &&
+                        dni.equalsIgnoreCase(garaje[i][j].getDniComprador())) {
+                    detalles.append(garaje[i][j].getDetalles());
+                }
+            }
+        }
+        if (detalles.isEmpty()) {
+            detalles = new StringBuilder("No hay detalles");
+        }
+        return detalles.toString();
+    }
 
+    public String listarTrasterosPorDni(String dni) {
+        StringBuilder detalles = new StringBuilder();
+
+        if (dni == null || dni.isEmpty()) {
+            return "Dni no valido";
+        }
+        for (int i = 0; i < trasteros.length; i++) {
+            if (trasteros[i] != null &&
+                    trasteros[i].getEstado() == Trastero.Estado.VENDIDO &&
+                    dni.equalsIgnoreCase(trasteros[i].getDniComprador())) {
+                detalles.append(trasteros[i].getDetalles());
+            }
+        }
+
+        if (detalles.isEmpty()) {
+            detalles = new StringBuilder("No hay detalles");
+        }
+
+        return detalles.toString();
+
+    }
 }
-
