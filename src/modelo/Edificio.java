@@ -480,7 +480,7 @@ public class Edificio {
 
     // Union viviendas
     public boolean puedenUnirseViviendas(int planta, int puerta1, int puerta2) {
-        if (puerta1 - puerta2 == 1) {
+        if (puerta1 - puerta2 == 1 || puerta2 - puerta1 == 1) {
             if (getVivienda(planta, puerta1) != null && getVivienda(planta, puerta2) != null) {
                 if (getVivienda(planta, puerta1).estaDisponible() && getVivienda(planta, puerta2).estaDisponible()) {
                     return true;
@@ -491,29 +491,40 @@ public class Edificio {
         return false;
     }
     public boolean unirViviendas(int planta, int puerta1, int puerta2, String dni, Vivienda.Calidad calidad){
-        if (puerta1 >= puerta2){
-            puerta1 = puerta2;
+        if (puerta1 > puerta2){
+            int aux = puerta2; // Auxiliar para intercambiar puertas
             puerta2 = puerta1;
-        } else{
-            if (puedenUnirseViviendas(planta, puerta1, puerta2)){
-                double precionuevo = getVivienda(planta, puerta1).getPrecio() + getVivienda(planta, puerta2).getPrecio();
-                double metrosnuevo = getVivienda(planta, puerta1).getMetrosCuadrados() + getVivienda(planta, puerta2).getMetrosCuadrados();
-                int habnuevo= getVivienda(planta, puerta1).getHabitaciones() + getVivienda(planta, puerta2).getHabitaciones();
-
-                new Vivienda (precionuevo,metrosnuevo,habnuevo);
-                //(dni, getVivienda(planta,puerta1).calidad);
-
-            }
+            puerta1 = aux;
         }
+        if (puedenUnirseViviendas(planta, puerta1, puerta2)) {
+            // Guardamos en variables la suma del precio metros cuadrados y habitaciones
+            double precionuevo = getVivienda(planta, puerta1).getPrecio() + getVivienda(planta, puerta2).getPrecio();
+            double metrosnuevo = getVivienda(planta, puerta1).getMetrosCuadrados()
+                    + getVivienda(planta, puerta2).getMetrosCuadrados();
+            int habnuevo = getVivienda(planta, puerta1).getHabitaciones()
+                    + getVivienda(planta, puerta2).getHabitaciones();
 
+            // Nueva vivienda con características nuevas y venta al comprador
+            Vivienda nueva = new Vivienda(precionuevo, metrosnuevo, habnuevo);
+            nueva.vender(dni, calidad);
+            setVivienda(planta, puerta1, nueva); // Vivienda unida en puerta
 
-
-        return true;
+            //20. Desplazar todas las viviendas a la izquierda a partir de puerta2
+            Vivienda aux;
+            aux = viviendas[planta][2]; // Guardo la vivienda con puerta 3
+            for (int i = 2; i < viviendas[planta].length - 1; i++) {
+                viviendas[planta][i] = viviendas[planta][i + 1]; //Guardo en la posicion actual la vivienda siguiente
+                viviendas[planta][viviendas[planta].length - 2] = aux; // Guardo en la penultima posicion la vivienda con puerta3
+                viviendas[planta][viviendas[planta].length - 1] = null;
+            }
+            return true;
+        } else
+            return false;
     }
 
     // Union trasteros
     public boolean puedenUnirseTrasteros(int trastero1, int trastero2){
-        if (trastero1 - trastero2 == 1) {
+        if (trastero1 - trastero2 == 1 || trastero2 - trastero1 == 1) {
             if (getTrastero(trastero1) != null && getTrastero(trastero2) != null) {
                 if (getTrastero(trastero1).estaDisponible() && getTrastero(trastero2).estaDisponible()) {
                     return true;
@@ -524,10 +535,14 @@ public class Edificio {
         return false;
     }
     public boolean unirTrasteros(int trastero1, int trastero2, String dniComprador){
+        // Suma precio y metros cuadrados
+        //• Crea nuevo trastero unido y lo marca como VENDIDO
+        //• Desplaza el array hacia la izquierda
         if (puedenUnirseTrasteros(trastero1,trastero2)){
             double precionuevo = getTrastero(trastero1).getPrecio() + getTrastero(trastero2).getPrecio();
             double metrosnuevo = getTrastero(trastero1).getMetrosCuadrados() + getTrastero(trastero2).getMetrosCuadrados();
-            new Trastero (precionuevo,metrosnuevo);
+            Trastero nuevo = new Trastero (precionuevo,metrosnuevo);
+            nuevo.vender(dniComprador);
 
 
         }
