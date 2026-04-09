@@ -354,7 +354,7 @@ public class Edificio {
 
     //Cálculos
 
-    public double calcularIngresoPotencialesViviendas() {
+    public double calcularIngresosPotenciales() {
         double ingresoPotencial = 0;
 
         for (int planta = numPlantas - 1; planta >= 0; planta--) {
@@ -372,7 +372,7 @@ public class Edificio {
 
     }
 
-    public double calcularIngresosVivVendidas() {
+    public double calcularIngresosVendidos() {
         double ingresoVivVendidas = 0;
 
         for (int planta = numPlantas - 1; planta >= 0; planta--) {
@@ -388,7 +388,7 @@ public class Edificio {
         return ingresoVivVendidas;
     }
 
-    public double calcularIngresoPotencialPlazaGaraje() {
+    public double calcularIngresosPotencialesPlazaGaraje() {
         double ingresoPotencialPlazaGaraje = 0;
 
         for (int planta = 0; planta < 2; planta++) {
@@ -420,7 +420,7 @@ public class Edificio {
         return ingresoVendidosPLazas;
     }
 
-    public double calcularIngresoPotencialesTrasteros() {
+    public double calcularIngresosPotencialesTrasteros() {
         double ingresoPotencialesTrasteros = 0;
 
         for (int puerta = 0; puerta < numTrasteros; puerta++) {
@@ -434,7 +434,7 @@ public class Edificio {
     }
 
 
-    public double calcularTrasterosVendidos() {
+    public double calcularIngresosVendidosTrasteros() {
         double ingresoTrasterosVendidos = 0;
 
         for (int puerta = 0; puerta < numTrasteros; puerta++) {
@@ -484,7 +484,7 @@ public class Edificio {
         for (int planta = 0; planta < numPlantas; planta++) {
             for (int puerta = 0; puerta < viviendasPorPlanta; puerta++) {
                 Vivienda v = viviendas[planta][puerta];
-                if (v != null && v.cumpleSuperficie(metrosMin, metrosMax)) {
+                if (v != null && v.cumpleSuperficie(metrosMin, metrosMax) && v.estaDisponible()) {
                     System.out.println("Planta " + planta + ", Puerta " + puerta + ": " + v);
                     encontrada = true;
                 }
@@ -504,7 +504,7 @@ public class Edificio {
         for (int planta = 0; planta < numPlantas; planta++) {
             for (int puerta = 0; puerta < viviendasPorPlanta; puerta++) {
                 Vivienda v = viviendas[planta][puerta];
-                if (v != null && v.cumplePrecio(precioMin, precioMax)) {
+                if (v != null && v.cumplePrecio(precioMin, precioMax) && v.estaDisponible()) {
                     System.out.println("Planta " + planta + ", Puerta " + puerta + ": " + v);
                     encontrada = true;
                 }
@@ -524,7 +524,7 @@ public class Edificio {
         for (int planta = 0; planta < numPlantas; planta++) {
             for (int puerta = 0; puerta < viviendasPorPlanta; puerta++) {
                 Vivienda v = viviendas[planta][puerta];
-                if (v != null && v.cumpleHabitaciones(habMin, habMax)) {
+                if (v != null && v.cumpleHabitaciones(habMin, habMax) && v.estaDisponible()) {
                     System.out.println("Planta " + planta + ", Puerta " + puerta + ": " + v);
                     encontrada = true;
                 }
@@ -553,7 +553,8 @@ public class Edificio {
                 if (v != null &&
                         v.cumpleSuperficie(metrosMin, metrosMax) &&
                         v.cumplePrecio(precioMin, precioMax) &&
-                        v.cumpleHabitaciones(habMin, habMax)) {
+                        v.cumpleHabitaciones(habMin, habMax) &&
+                        v.estaDisponible())  {
                     System.out.println("Planta " + planta + ", Puerta " + puerta + ": " + v);
                     encontrada = true;
                 }
@@ -573,7 +574,7 @@ public class Edificio {
         for (int sotano = 0; sotano < PLANTAS_GARAJE; sotano++) {
             for (int plaza = 0; plaza < plazasPorPlantaGaraje; plaza++) {
                 PlazaGaraje p = garaje[sotano][plaza];
-                if (p != null && p.cumpleSuperficie(metrosMin, metrosMax)) {
+                if (p != null && p.cumpleSuperficie(metrosMin, metrosMax)&& p.estaDisponible()) {
                     System.out.println("Sótano " + (sotano + 1) + ", Plaza " + plaza + ": " + p);
                     encontrada = true;
                 }
@@ -593,7 +594,7 @@ public class Edificio {
         for (int sotano = 0; sotano < PLANTAS_GARAJE; sotano++) {
             for (int plaza = 0; plaza < plazasPorPlantaGaraje; plaza++) {
                 PlazaGaraje p = garaje[sotano][plaza];
-                if (p != null && p.cumplePrecio(precioMin, precioMax)) {
+                if (p != null && p.cumplePrecio(precioMin, precioMax) && p.estaDisponible()) {
                     System.out.println("Sótano " + (sotano + 1) + ", Plaza " + plaza + ": " + p);
                     encontrada = true;
                 }
@@ -622,7 +623,7 @@ public class Edificio {
         for (int sotano = 0; sotano < PLANTAS_GARAJE; sotano++) {
             for (int plaza = 0; plaza < plazasPorPlantaGaraje; plaza++) {
                 PlazaGaraje p = garaje[sotano][plaza];
-                if (p != null && p.cumpleTamano(filtroTamano)) {
+                if (p != null && p.cumpleTamano(filtroTamano) && p.estaDisponible()) {
                     System.out.println("Sótano " + (sotano + 1) + ", Plaza " + plaza + ": " + p);
                     encontrada = true;
                 }
@@ -649,7 +650,8 @@ public class Edificio {
                 PlazaGaraje p = garaje[sotano][plaza];
                 if (p != null &&
                         p.cumpleSuperficie(metrosMin, metrosMax) &&
-                        p.cumplePrecio(precioMin, precioMax)) {
+                        p.cumplePrecio(precioMin, precioMax) &&
+                        p.estaDisponible()) {
                     System.out.println("Sótano " + (sotano + 1) + ", Plaza " + plaza + ": " + p);
                     encontrada = true;
                 }
@@ -668,7 +670,7 @@ public class Edificio {
 
         for (int i = 0; i < numTrasteros; i++) {
             Trastero t = trasteros[i];
-            if (t != null && t.cumpleSuperficie(metrosMin, metrosMax)) {
+            if (t != null && t.cumpleSuperficie(metrosMin, metrosMax) && t.estaDisponible()) {
                 System.out.println("Trastero " + i + ": " + t);
                 encontrada = true;
             }
@@ -686,7 +688,7 @@ public class Edificio {
 
         for (int i = 0; i < numTrasteros; i++) {
             Trastero t = trasteros[i];
-            if (t != null && t.cumplePrecio(precioMin, precioMax)) {
+            if (t != null && t.cumplePrecio(precioMin, precioMax) && t.estaDisponible()) {
                 System.out.println("Trastero " + i + ": " + t);
                 encontrada = true;
             }
@@ -703,9 +705,9 @@ public class Edificio {
         if (filtroTamano == 0) {
             tipo = "TODAS";
         } else if (filtroTamano == 1) {
-            tipo = "PEQUEÑAS (< 12 m2)";
+            tipo = "PEQUEÑAS (< 7 m2)";
         } else if (filtroTamano == 2) {
-            tipo = "GRANDES (>= 12 m2)";
+            tipo = "GRANDES (>= 7 m2)";
         }
 
         System.out.println("\n=== Trasteros " + tipo + " ===");
@@ -713,7 +715,7 @@ public class Edificio {
 
         for (int i = 0; i < numTrasteros; i++) {
             Trastero t = trasteros[i];
-            if (t != null && t.cumpleTamano(filtroTamano)) {
+            if (t != null && t.cumpleTamano(filtroTamano) && t.estaDisponible()) {
                 System.out.println("Trastero " + i + ": " + t);
                 encontrada = true;
             }
@@ -738,7 +740,8 @@ public class Edificio {
             Trastero t = trasteros[i];
             if (t != null &&
                     t.cumpleSuperficie(metrosMin, metrosMax) &&
-                    t.cumplePrecio(precioMin, precioMax)) {
+                    t.cumplePrecio(precioMin, precioMax) &&
+                    t.estaDisponible()) {
                 System.out.println("Trastero " + i + ": " + t);
                 encontrada = true;
             }
@@ -778,8 +781,9 @@ public class Edificio {
 
             // Nueva vivienda con características nuevas y venta al comprador
             Vivienda nueva = new Vivienda(precioNuevo, metrosNuevo, habNuevo);
-            nueva.vender(dni, calidad);
-            setVivienda(planta, puerta1, nueva); // Vivienda unida en puerta
+            if(nueva.vender(dni, calidad)){
+                setVivienda(planta, puerta1, nueva);
+            }
 
             //20. Desplazar todas las viviendas a la izquierda a partir de puerta2
             // Guardo la vivienda a partir de puerta 2
@@ -813,8 +817,9 @@ public class Edificio {
             double metrosNuevo = getTrastero(trastero1).getMetrosCuadrados() + getTrastero(trastero2).getMetrosCuadrados();
 
             Trastero nuevo = new Trastero(precioNuevo, metrosNuevo);
-            nuevo.vender(dniComprador);
-            trasteros[trastero1] = nuevo;
+            if(nuevo.vender(dniComprador)){
+                trasteros[trastero1] = nuevo;
+            }
 
             for (int i = trastero2; i < trasteros.length - 1; i++) {
                 trasteros[i] = trasteros[i + 1]; //Guardo en la posición actual la vivienda siguiente
