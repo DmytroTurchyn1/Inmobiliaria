@@ -70,13 +70,11 @@ public class Edificio {
             System.out.println("ERROR: Planta o puerta no esta valida");
             return null;
         }
-        for (int i = 0; i <= planta; i++) {
-            if (this.viviendasPorPlanta == planta && this.viviendas[i][puerta] != null) {
-                return this.viviendas[planta][puerta];
-            }
+        if (viviendas[planta][puerta] == null) {
+            System.out.println("ERROR: Vivienda no existe");
+            return null;
         }
-        System.out.println("ERROR: Vivienda no existe");
-        return null;
+        return this.viviendas[planta][puerta];
     }
 
     public PlazaGaraje getPlazaGaraje(int sotano, int plaza) {
@@ -99,9 +97,10 @@ public class Edificio {
     }
 
     public void setVivienda(int planta, int puerta, Vivienda vivienda) {
-        if (this.getVivienda(planta, puerta) != null &&
-                (planta >= this.numPlantas || planta < 0) &&
-                (puerta >= this.viviendasPorPlanta || puerta < 0)) {
+        if (planta >= numPlantas ||
+                planta < 0 ||
+                puerta >= viviendasPorPlanta ||
+                puerta < 0) {
             System.out.println("ERROR: Vivienda existe en esta puerta o planta o puerta no están validas");
             return;
         }
@@ -117,7 +116,7 @@ public class Edificio {
 
         System.out.println(" ");
 
-        for (int planta = numPlantas; planta >= 0; planta--) {
+        for (int planta = numPlantas - 1; planta >= 0; planta--) {
             System.out.println("Planta" + planta);
 
             for (int puerta = 0; puerta < viviendasPorPlanta; puerta++) {
@@ -147,7 +146,7 @@ public class Edificio {
 
     }
 
-    public void mostrarEdificio() {
+    public void mostrarMatrizEdificio() {
         mostrarEstado();
 
         System.out.println("[GARAJE]");
@@ -353,9 +352,9 @@ public class Edificio {
     }
 
 
-    //CALCULOS
+    //Cálculos
 
-    public double calculoIngresoPotencialesViviendas() {
+    public double calcularIngresoPotencialesViviendas() {
         double ingresoPotencial = 0;
 
         for (int planta = numPlantas - 1; planta >= 0; planta--) {
@@ -373,7 +372,7 @@ public class Edificio {
 
     }
 
-    public double calculoIngresosVivVendidas() {
+    public double calcularIngresosVivVendidas() {
         double ingresoVivVendidas = 0;
 
         for (int planta = numPlantas - 1; planta >= 0; planta--) {
@@ -389,7 +388,7 @@ public class Edificio {
         return ingresoVivVendidas;
     }
 
-    public double calculoIngresoPotencialPlazaGaraje() {
+    public double calcularIngresoPotencialPlazaGaraje() {
         double ingresoPotencialPlazaGaraje = 0;
 
         for (int planta = 0; planta < 2; planta++) {
@@ -405,7 +404,7 @@ public class Edificio {
         return ingresoPotencialPlazaGaraje;
     }
 
-    public double calculoIngresosVendidosPlazaGaraje() {
+    public double calcularIngresosVendidosPlazaGaraje() {
         double ingresoVendidosPLazas = 0;
 
         for (int planta = 0; planta < 2; planta++) {
@@ -421,7 +420,7 @@ public class Edificio {
         return ingresoVendidosPLazas;
     }
 
-    public double calculoIngresoPotencialesTrasteros() {
+    public double calcularIngresoPotencialesTrasteros() {
         double ingresoPotencialesTrasteros = 0;
 
         for (int puerta = 0; puerta < numTrasteros; puerta++) {
@@ -435,7 +434,7 @@ public class Edificio {
     }
 
 
-    public double calculoTrasterosVendidos() {
+    public double calcularTrasterosVendidos() {
         double ingresoTrasterosVendidos = 0;
 
         for (int puerta = 0; puerta < numTrasteros; puerta++) {
