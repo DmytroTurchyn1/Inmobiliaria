@@ -622,18 +622,9 @@ public class Edificio {
         for (int sotano = 0; sotano < PLANTAS_GARAJE; sotano++) {
             for (int plaza = 0; plaza < plazasPorPlantaGaraje; plaza++) {
                 PlazaGaraje p = garaje[sotano][plaza];
-                if (p != null) {
-                    double metros = p.getMetrosCuadrados();
-                    if (filtroTamano == 0) {
-                        System.out.println("Sótano " + (sotano + 1) + ", Plaza " + plaza + ": " + p);
-                        encontrada = true;
-                    } else if (filtroTamano == 1 && metros <= 12) {
-                        System.out.println("Sótano " + (sotano + 1) + ", Plaza " + plaza + ": " + p);
-                        encontrada = true;
-                    } else if (filtroTamano == 2 && metros > 12) {
-                        System.out.println("Sótano " + (sotano + 1) + ", Plaza " + plaza + ": " + p);
-                        encontrada = true;
-                    }
+                if (p != null && p.cumpleTamano(filtroTamano)) {
+                    System.out.println("Sótano " + (sotano + 1) + ", Plaza " + plaza + ": " + p);
+                    encontrada = true;
                 }
             }
         }
@@ -709,26 +700,22 @@ public class Edificio {
     // 7.4 Búsqueda de trasteros por tamaño (0: todos, 1: pequeños, 2: grandes)
     public void buscarTrasterosPorTamano(int filtroTamano) {
         String tipo = "";
-
-        getTrastero(filtroTamano).cumpleTamano(filtroTamano);
+        if (filtroTamano == 0) {
+            tipo = "TODAS";
+        } else if (filtroTamano == 1) {
+            tipo = "PEQUEÑAS (< 12 m2)";
+        } else if (filtroTamano == 2) {
+            tipo = "GRANDES (>= 12 m2)";
+        }
 
         System.out.println("\n=== Trasteros " + tipo + " ===");
         boolean encontrada = false;
 
         for (int i = 0; i < numTrasteros; i++) {
             Trastero t = trasteros[i];
-            if (t != null) {
-                double metros = t.getMetrosCuadrados();
-                if (filtroTamano == 0) {
-                    System.out.println("Trastero " + i + ": " + t);
-                    encontrada = true;
-                } else if (filtroTamano == 1 && metros < 8) {
-                    System.out.println("Trastero " + i + ": " + t);
-                    encontrada = true;
-                } else if (filtroTamano == 2 && metros >= 8) {
-                    System.out.println("Trastero " + i + ": " + t);
-                    encontrada = true;
-                }
+            if (t != null && t.cumpleTamano(filtroTamano)) {
+                System.out.println("Trastero " + i + ": " + t);
+                encontrada = true;
             }
         }
 
