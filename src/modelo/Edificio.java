@@ -5,16 +5,16 @@ import java.util.Random;
 public class Edificio {
 
     private static final long SEMILLA = 12345L;
-    public static final int PLANTAS_GARAJE = 2;
+    private static final int PLANTAS_GARAJE = 2;
     private final Random rand = new Random(SEMILLA);
-    public String nombre;
-    public Vivienda[][] viviendas;
-    public int numPlantas;
-    public int viviendasPorPlanta;
-    public PlazaGaraje[][] garaje;
-    public int plazasPorPlantaGaraje;
-    public Trastero[] trasteros;
-    public int numTrasteros;
+    private String nombre;
+    private final Vivienda[][] viviendas;
+    private final int numPlantas;
+    private final int viviendasPorPlanta;
+    private final PlazaGaraje[][] garaje;
+    private final int plazasPorPlantaGaraje;
+    private final Trastero[] trasteros;
+    private final int numTrasteros;
 
 
     public Edificio(String nombre, int numPlantas, int viviendasPorPlanta, int plazasPorPlantaGaraje, int numTrasteros) {
