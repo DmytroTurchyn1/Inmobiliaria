@@ -67,7 +67,7 @@ public class Trastero {
         return metrosCuadrados > UMBRAL_GRANDE;
     }
 
-    public boolean cumpleSuperficie(double supMin,double supMax){ // ¿ Superficie dentro del rango ?
+    public boolean cumpleSuperficie(double supMin,double supMax) { // ¿ Superficie dentro del rango ?
         return metrosCuadrados >= supMin && metrosCuadrados <= supMax;
     }
 
@@ -86,7 +86,6 @@ public class Trastero {
             return esGrande(); // Plazas grandes
         }
         return false;
-
     }
 
     public boolean estaDisponible(){

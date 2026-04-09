@@ -709,13 +709,8 @@ public class Edificio {
     // 7.4 Búsqueda de trasteros por tamaño (0: todos, 1: pequeños, 2: grandes)
     public void buscarTrasterosPorTamano(int filtroTamano) {
         String tipo = "";
-        if (filtroTamano == 0) {
-            tipo = "TODOS";
-        } else if (filtroTamano == 1) {
-            tipo = "PEQUEÑOS (< 8 m2)";
-        } else if (filtroTamano == 2) {
-            tipo = "GRANDES (>= 8 m2)";
-        }
+
+        getTrastero(filtroTamano).cumpleTamano(filtroTamano);
 
         System.out.println("\n=== Trasteros " + tipo + " ===");
         boolean encontrada = false;
