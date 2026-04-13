@@ -762,3 +762,538 @@ Una vez completada la clase `Edificio`, en la siguiente fase se implementará:
 
 </details>
 </details>
+
+<details>
+<summary> FASE 3: SISTEMA COMPLETO </summary>
+
+<details>
+<summary> 1. INTRODUCCIÓN </summary>
+
+Este documento describe la implementación del nivel más alto del sistema: la clase
+Promotora que gestiona múltiples edificios y la interfaz de usuario (Main). Esta fase
+integra todos los componentes desarrollados anteriormente.
+#### **1.1. Requisitos Previos**
+
+Antes de implementar esta fase, deben estar completadas:
+
+   - Fase 1: Clases Vivienda, PlazaGaraje y Trastero
+   - Fase 2: Clase Edificio con todos sus métodos
+
+#### **1.2. Objetivos de esta Fase**
+
+   - Gestionar colecciones dinámicas de edificios
+   - Implementar operaciones agregadas sobre múltiples edificios
+   - Desarrollar interfaz de usuario completa con menús
+
+</details>
+
+<details>
+<summary> PARTE I: CLASE PROMOTORA </summary>
+  
+<details>
+<summary> 2. ESTRUCTURA DE LA CLASE PROMOTORA </summary>
+  
+#### **2.1. Atributos Principales**
+
+
+|Atributo|Tipo|Descripción|
+|---|---|---|
+|nombre|String|Nombre de la promotora inmobiliaria|
+|edificios|Edificio[]|Array dinámico de edificios|
+|numEdificios|int|Contador de edificios actualmente en el<br>array|
+
+
+#### **2.2. Gestión del Array Dinámico**
+
+El array de edificios se gestiona de forma dinámica:
+
+   - Capacidad inicial: 10 edificios
+   - Cuando se llena, se duplica automáticamente.
+   - numEdificios rastrea cuántos edificios hay realmente
+
+</details>
+
+<details>
+<summary> 3. CONSTRUCTOR Y GESTIÓN DE EDIFICIOS </summary>
+  
+#### **3.1. Constructor**
+
+**Sintaxis:** public Promotora(String nombre)
+
+
+**Acciones:**
+
+   - Asigna el nombre de la promotora
+   - Inicializa el array con capacidad 3: edificios = new Edificio[3]
+   - Crea dos edificios nuevos y los coloca en el vector.
+   - Establece numEdificios = 2
+
+#### **3.2. agregarEdificio(Edificio edificio)**
+
+**Propósito:** Añadir un nuevo edificio a la promotora
+
+
+**Lógica:**
+
+  - Verificar si el array está lleno (numEdificios == edificios.length)
+  - Si está lleno: duplicar capacidad con Arrays.copyOf(edificios, edificios.length * 2)
+  - Añadir el edificio en la posición numEdificios
+  - Incrementar numEdificios
+
+#### **3.3. Métodos de Acceso**
+
+   - **getEdificio(int indice):** Retorna el edificio en el índice especificado (con
+validación de límites)
+   - **getEdificios():** Retorna una copia del array solo con los edificios válidos usando
+Arrays.copyOf(edificios, numEdificios)
+   - **getNumeroEdificios():** Retorna el número de edificios
+
+
+</details>
+
+<details>
+<summary> 4. OPERACIONES DE VENTA </summary>
+
+
+La Promotora delega las operaciones de venta a los edificios correspondientes, pero
+añade validación y mensajes informativos.
+#### **4.1. venderVivienda()**
+
+**Sintaxis:** public boolean venderVivienda(int indiceEdificio, int planta, int puerta, String
+dni, Vivienda.Calidad calidad)
+
+
+**Proceso:**
+
+  - Obtener el edificio usando getEdificio(indiceEdificio)
+  - Si el edificio es null: mostrar error y retornar false
+  - Obtener la vivienda del edificio
+  - Si la vivienda es null: mostrar error y retornar false
+  - Intentar vender la vivienda llamando a vivienda.vender(dni, calidad)
+  - Si tiene éxito: mostrar mensaje confirmatorio con detalles
+  - Retornar el resultado
+
+#### **4.2. reservarVivienda()**
+
+Funciona igual que venderVivienda() pero llama a vivienda.reservar() en lugar de
+vender().
+
+#### **4.3. venderPlazaGaraje()**
+
+**Sintaxis:** public boolean venderPlazaGaraje(int indiceEdificio, int sotano, int plaza,
+String dni)
+
+
+**Proceso similar pero con validaciones específicas:**
+
+   - Validar que el edificio existe
+   - Validar que la plaza existe
+   - Validar que la plaza está disponible
+   - Vender y mostrar mensaje de confirmación
+
+#### **4.4. venderTrastero()**
+
+Funciona de manera análoga a venderPlazaGaraje().
+
+</details>
+
+<details>
+<summary> 5. ESTADÍSTICAS AGREGADAS </summary>
+  
+#### **5.1. mostrarEstadisticasGenerales()**
+
+**Propósito:** Mostrar un resumen completo de todas las propiedades de todos los
+edificios
+
+
+**Información recopilada:**
+
+**Para Viviendas:**
+
+   - Total de viviendas
+   - Cantidad libres, reservadas y vendidas
+   - Ingresos potenciales (suma de todas)
+   - Ingresos reales (suma de vendidas)
+
+
+**Para Plazas de Garaje:**
+
+   - Total de plazas
+   - Cantidad libres y vendidas
+   - Ingresos potenciales y reales
+
+
+**Para Trasteros:**
+
+   - Total de trasteros
+   - Cantidad libres y vendidos
+   - Ingresos potenciales y reales
+
+
+**Implementación:**
+
+  - Recorrer todos los edificios de la promotora
+  - Para cada edificio, usar sus métodos de conteo (contarViviendasLibres, etc.)
+  - Acumular los totales
+  - Mostrar resumen formateado con printf
+
+</details>
+
+<details>
+<summary> 6. CONSULTAS POR DNI A NIVEL DE PROMOTORA </summary>
+  
+#### **6.1. listarPropiedadesPorDni(String dni)**
+
+**Propósito:** Mostrar todas las propiedades de un comprador en todos los edificios
+
+
+**Proceso:**
+
+  - Recorrer todos los edificios
+  - Para cada edificio, buscar viviendas del DNI especificado
+  - Si encuentra alguna, llamar a edificio.listarViviendasPorDni(dni)
+  - Acumular el total de viviendas y la inversión
+  - Repetir el proceso para plazas de garaje
+  - Repetir el proceso para trasteros
+  - Mostrar resumen total con inversión global
+
+#### **6.2. Métodos Auxiliares**
+
+   - **contarPlazasPorDni(String dni):** Suma los resultados de todos los edificios
+   - **contarTrasterosPorDni(String dni):** Suma los resultados de todos los edificios
+
+</details>
+
+<details>
+<summary> 7. BÚSQUEDAS A NIVEL DE PROMOTORA </summary>
+
+La Promotora implementa métodos de búsqueda que recorren todos los edificios. Estos
+métodos siguen un patrón común:
+#### **7.1. Búsquedas de Viviendas**
+
+   - **buscarViviendasPorSuperficie(double metrosMin, double metrosMax)**
+   - **buscarViviendasPorPrecio(double precioMin, double precioMax)**
+   - **buscarViviendasPorHabitaciones(int habMin, int habMax)**
+   - **buscarViviendas(...) - búsqueda combinada**
+
+#### **7.2. Búsquedas de Plazas de Garaje**
+
+   - **buscarPlazasGarajePorSuperficie(double metrosMin, double metrosMax)**
+   - **buscarPlazasGarajePorPrecio(double precioMin, double precioMax)**
+   - **buscarPlazasGarajePorTamano(int filtroTamano)**
+   - **buscarPlazasGaraje(...) - búsqueda combinada**
+
+#### **7.3. Búsquedas de Trasteros**
+
+Métodos análogos a las plazas de garaje.
+
+#### **7.4. Patrón de Implementación**
+
+Todos estos métodos siguen este patrón:
+
+  - Mostrar título de la búsqueda
+  - Verificar si hay edificios registrados
+  - Recorrer todos los edificios
+  - Para cada edificio, llamar al método de búsqueda correspondiente
+
+</details>
+
+</details>
+
+<details>
+<summary> PARTE II: INTERFAZ DE USUARIO (MAIN) </summary>
+  
+<details>
+<summary> 9. CLASE MAIN </summary>
+
+
+La clase Main proporciona la interfaz de usuario mediante un sistema de menús por
+consola.
+#### **9.1. Atributos Estáticos**
+
+|Atributo|Tipo|Descripción|
+|---|---|---|
+|scanner|Scanner|Scanner global para leer entrada del usuario|
+|promotora|Promotora|Instancia de la promotora que se está<br>gestionando|
+
+
+#### **9.2. Método main()**
+
+Punto de entrada del programa:
+
+  - Llamar a inicializar()
+  - Llamar a menuPrincipal()
+
+#### **9.3. Método inicializar()**
+
+**Propósito:** Inicializar el sistema cargando datos o creando una nueva promotora
+
+
+**Proceso:**
+
+  - Mostrar mensaje de bienvenida
+  - Intentar cargar datos: promotora = GestorArchivos.cargar()
+  - Si cargar() retorna null (no hay datos previos):
+  - Pedir al usuario el nombre de la promotora
+  - Crear nueva Promotora con ese nombre
+  - Si cargar() retorna una promotora: dar la bienvenida
+</details>
+
+<details>
+<summary> 10. ESTRUCTURA DEL MENÚ PRINCIPAL </summary>
+  
+#### **10.1. Opciones del Menú**
+
+El menú principal organiza las funcionalidades en secciones:
+
+|Sección|Opción|Descripción|
+|---|---|---|
+|VIVIENDAS|1|Ver estado viviendas|
+||2|Vender/Reservar vivienda|
+||3|Unir viviendas|
+||4|Consultar viviendas disponibles|
+|GARAJE|5|Ver estado garaje|
+||6|Vender plaza de garaje|
+||7|Consultar plazas disponibles|
+|TRASTEROS|8|Ver estado trasteros|
+||9|Vender trastero|
+||10|Unir trasteros|
+||11|Consultar trasteros disponibles|
+|GENERAL|12|Gestionar edificios|
+||13|Ver matriz del edificio|
+||14|Consultar propiedades por DNI|
+||15|Buscar viviendas|
+||16|Buscar plazas de garaje|
+||17|Buscar trasteros|
+||18|Ver estadísticas|
+||0|Salir|
+
+
+#### **10.2. Implementación del Bucle Principal**
+
+**Estructura:**
+
+  - Bucle do-while que continúa hasta que el usuario seleccione 0
+  - Mostrar menú y leer opción con leerEntero()
+  - Switch para ejecutar la función correspondiente
+  - Antes de salir (opción 0): ofrecer guardar datos
+
+</details>
+
+<details>
+<summary> 11. MÉTODOS AUXILIARES DE ENTRADA </summary>
+
+#### **11.1. leerEntero()**
+
+**Propósito:** Leer un número entero de forma segura
+
+
+**Lógica:**
+
+  - Intentar leer un int con scanner.nextInt()
+  - Limpiar el buffer con scanner.nextLine()
+  - Si ocurre InputMismatchException: mostrar error, limpiar buffer, retornar -1
+
+#### **11.2. leerDouble()**
+
+Similar a leerEntero() pero para números decimales.
+
+#### **11.3. leerCadena()**
+
+**Propósito:** Leer una cadena de texto y validar que no esté vacía
+
+
+**Lógica:**
+
+  - Leer línea con scanner.nextLine()
+  - Si está vacía (trim().isEmpty()): mostrar error, pedir de nuevo
+  - Retornar la cadena válida
+
+</details>
+
+<details>
+<summary> 12. FUNCIONES PRINCIPALES DEL MENÚ </summary>
+
+Cada opción del menú tiene su propia función. Aquí se describen las más importantes:
+#### **12.1. gestionarEdificios()**
+
+Submenú con opciones para:
+
+   - Listar edificios existentes
+   - Crear nuevo edificio (pidiendo todos sus parámetros). Al crearse, el edificio
+genera automáticamente propiedades con valores aleatorios
+
+
+**Nota importante:** El constructor de Edificio llama automáticamente a los métodos de
+generación aleatoria, por lo que no es necesario incluir una opción en el menú para
+generar datos aleatorios.
+
+#### **12.2. menuVenderReservar()**
+
+Submenú que permite:
+
+  - Vender vivienda
+  - Reservar vivienda
+
+
+**Proceso para vender:**
+
+  - Seleccionar edificio
+  - Seleccionar planta y puerta
+  - Pedir DNI del comprador
+  - Seleccionar calidad (ESTANDAR, PLUS, DE_LUXE)
+  - Llamar a promotora.venderVivienda(...)
+
+#### **12.3. unirViviendas()**
+
+**Proceso:**
+
+  - Seleccionar edificio
+  - Seleccionar planta
+  - Seleccionar dos puertas contiguas
+  - Pedir DNI y calidad
+  - Llamar a edificio.unirViviendas(...)
+
+#### **12.4. buscarViviendas()**
+
+Submenú con opciones:
+
+   - Buscar por superficie
+   - Buscar por precio
+   - Buscar por habitaciones
+   - Búsqueda combinada (todos los criterios)
+
+
+Para cada opción, pedir los parámetros necesarios y llamar al método correspondiente
+de Promotora.
+
+#### **12.5. consultarPropiedadesPorDni()**
+
+**Proceso:**
+
+  - Pedir DNI al usuario
+  - Llamar a promotora.listarPropiedadesPorDni(dni)
+
+</details>
+
+<details>
+<summary> 13. ORDEN DE IMPLEMENTACIÓN RECOMENDADO </summary>
+  
+#### **13.1. Fase A: Clase Promotora - Básico**
+
+  - Declarar atributos y constructor
+  - Implementar agregarEdificio() con expansión dinámica
+  - Implementar getters básicos
+  - Implementar listarEdificios()
+
+#### **13.2. Fase B: Promotora - Operaciones de Venta**
+
+  - Implementar venderVivienda()
+  - Implementar reservarVivienda()
+  - Implementar venderPlazaGaraje()
+  - Implementar venderTrastero()
+
+#### **13.3. Fase C: Promotora - Estadísticas**
+
+  - Implementar mostrarEstadisticasGenerales()
+  - Implementar consultas por DNI
+
+#### **13.4. Fase D: Promotora - Búsquedas**
+
+  - Implementar búsquedas de viviendas
+  - Implementar búsquedas de plazas
+  - Implementar búsquedas de trasteros
+
+#### **13.5. Fase E: GestorArchivos**
+
+  - Crear la clase en el paquete util
+  - Implementar guardar()
+  - Implementar cargar()
+  - Implementar existenDatos()
+  - Probar guardado y carga
+
+#### **13.6. Fase F: Main - Estructura Básica**
+
+  - Declarar atributos estáticos
+  - Implementar main(), inicializar()
+  - Implementar métodos auxiliares de lectura
+  - Implementar estructura del menú principal
+
+#### **13.7. Fase G: Main - Gestión de Edificios**
+
+  - Implementar gestionarEdificios()
+  - Implementar funciones de visualización
+
+#### **13.8. Fase H: Main - Operaciones de Venta**
+
+  - Implementar menuVenderReservar()
+  - Implementar venderPlazaGaraje()
+  - Implementar venderTrastero()
+
+#### **13.9. Fase I: Main - Operaciones Complejas**
+
+  - Implementar unirViviendas()
+  - Implementar unirTrasteros()
+
+#### **13.10. Fase J: Main - Búsquedas y Consultas**
+
+  - Implementar menús de búsqueda
+  - Implementar consultarPropiedadesPorDni()
+  - Implementar ver estadísticas
+
+</details>
+
+<details>
+<summary> 14. PUNTOS CLAVE DE ESTA FASE </summary>
+  
+#### **14.1. Conceptos Avanzados**
+
+   - **Arrays Dinámicos:** Gestión de colecciones que crecen según necesidad
+   - **Delegación Multinivel:** Main → Promotora → Edificio → Propiedad
+   - **Interfaz de Usuario:** Sistema de menús anidados con validación robusta
+
+#### **14.2. Mejores Prácticas Aplicadas**
+
+   - **Separación de Responsabilidades:** Cada clase tiene un propósito claro
+   - **Reutilización de Código:** Los métodos de las clases básicas se usan en todos
+los niveles
+   - **Validación Exhaustiva:** Verificación de índices, null Pointers, validación de
+entrada
+   - **Mensajes Informativos:** Feedback claro al usuario en cada operación
+
+</details>
+
+<details>
+<summary> 15. CONCLUSIÓN Y VISIÓN GENERAL </summary>
+
+
+Este sistema de gestión de promotora inmobiliaria demuestra una arquitectura bien
+organizada en capas:
+#### **15.1. Jerarquía del Sistema**
+
+   - **Capa de Datos Básicos:** Vivienda, PlazaGaraje, Trastero
+   - **Capa de Agregación:** Edificio
+   - **Capa de Gestión Global:** Promotora
+   - **Capa de Persistencia:** GestorArchivos
+   - **Capa de Presentación:** Main
+
+#### **15.2. Extensibilidad**
+
+El sistema está diseñado para permitir extensiones futuras como:
+
+   - Nuevos tipos de propiedades (locales comerciales, oficinas)
+   - Gestión de contratos de alquiler
+   - Sistema de reservas con plazos
+   - Informes estadísticos
+   - Almacenar el estado de todos los objetos mediante implementación de
+Serializable.
+   - Interfaz gráfica (GUI)
+
+# **_¡Sistema completo implementado!_**
+
+
+</details>
+
+</details>
+
+</details>
