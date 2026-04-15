@@ -807,7 +807,7 @@ Antes de implementar esta fase, deben estar completadas:
 
 El array de edificios se gestiona de forma dinámica:
 
-   - Capacidad inicial: 10 edificios
+   - Capacidad inicial: 3 edificios
    - Cuando se llena, se duplica automáticamente.
    - numEdificios rastrea cuántos edificios hay realmente
 
@@ -1032,11 +1032,9 @@ Punto de entrada del programa:
 **Proceso:**
 
   - Mostrar mensaje de bienvenida
-  - Intentar cargar datos: promotora = GestorArchivos.cargar()
-  - Si cargar() retorna null (no hay datos previos):
   - Pedir al usuario el nombre de la promotora
   - Crear nueva Promotora con ese nombre
-  - Si cargar() retorna una promotora: dar la bienvenida
+    
 </details>
 
 <details>
@@ -1076,7 +1074,6 @@ El menú principal organiza las funcionalidades en secciones:
   - Bucle do-while que continúa hasta que el usuario seleccione 0
   - Mostrar menú y leer opción con leerEntero()
   - Switch para ejecutar la función correspondiente
-  - Antes de salir (opción 0): ofrecer guardar datos
 
 </details>
 
@@ -1097,17 +1094,6 @@ El menú principal organiza las funcionalidades en secciones:
 #### **11.2. leerDouble()**
 
 Similar a leerEntero() pero para números decimales.
-
-#### **11.3. leerCadena()**
-
-**Propósito:** Leer una cadena de texto y validar que no esté vacía
-
-
-**Lógica:**
-
-  - Leer línea con scanner.nextLine()
-  - Si está vacía (trim().isEmpty()): mostrar error, pedir de nuevo
-  - Retornar la cadena válida
 
 </details>
 
@@ -1203,14 +1189,6 @@ de Promotora.
   - Implementar búsquedas de viviendas
   - Implementar búsquedas de plazas
   - Implementar búsquedas de trasteros
-
-#### **13.5. Fase E: GestorArchivos**
-
-  - Crear la clase en el paquete util
-  - Implementar guardar()
-  - Implementar cargar()
-  - Implementar existenDatos()
-  - Probar guardado y carga
 
 #### **13.6. Fase F: Main - Estructura Básica**
 
