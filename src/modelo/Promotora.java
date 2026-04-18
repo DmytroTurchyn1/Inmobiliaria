@@ -19,12 +19,12 @@ public class Promotora {
         if (numEdificios == edificios.length) {
             edificios = Arrays.copyOf(edificios, edificios.length * 2);
         }
-        edificios[numEdificios - 1] = edificio;
+        edificios[numEdificios] = edificio;
         numEdificios++;
     }
 
     public Edificio getEdificio(int indice) {
-        if (indice <= numEdificios && indice >= 0) {
+        if (indice < numEdificios && indice >= 0) {
             return edificios[indice];
         }
         System.out.println("Indice no valido");
@@ -85,7 +85,7 @@ public class Promotora {
 
     }
 
-    public boolean venderTrastero(int indiceEdificio, int indice, int plaza, String dni) {
+    public boolean venderTrastero(int indiceEdificio, int indice, String dni) {
 
         Edificio edificio = verificarEdificio(indiceEdificio);
         if (edificio == null) return false;
