@@ -429,7 +429,7 @@ Antes de implementar esta clase, deben estar completadas las clases:
 
 ```java
 public Edificio(String nombre, int numPlantas, int viviendasPorPlanta,
-                int plazasPorPlantaGaraje, int numTrasteros)
+                int plazasPorPlantaGaraje, int numTrasteros);
 ```
 
 **Acciones del constructor:**
