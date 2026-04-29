@@ -130,4 +130,191 @@ public class Promotora {
         }
         return edificio;
     }
+
+    // FASE C
+
+    public void mostrarEstadisticasGenerales() {
+        int totalViviendas = 0;
+        int libresV = 0;
+        int reservadasV = 0;
+        int vendidasV = 0;
+        double ingresosPotencialesV = 0.0;
+        double ingresosRealesV = 0.0;
+
+        int totalPlazas = 0;
+        int libresP = 0;
+        int vendidasP = 0;
+        double ingresosPotencialesP = 0.0;
+        double ingresosRealesP = 0.0;
+
+        int totalTrasteros = 0;
+        int libresT = 0;
+        int vendidosT = 0;
+        double ingresosPotencialesT = 0.0;
+        double ingresosRealesT = 0.0;
+
+        for (int i = 0; i < numEdificios; i++) {
+            Edificio e = edificios[i];
+            if (e != null) {
+                totalViviendas += e.getTotalViviendas();
+                libresV += e.contarViviendasLibres();
+                reservadasV += e.contarViviendasReservadas();
+                vendidasV += e.contarViviendasVendidas();
+                ingresosPotencialesV += e.calcularIngresosPotenciales();
+                ingresosRealesV += e.calcularIngresosVendidos();
+
+                totalPlazas += e.getTotalPlazasGaraje();
+                libresP += e.contarPlazasGarajeLibres();
+                vendidasP += e.contarPlazasGarajeVendidas();
+                ingresosPotencialesP += e.calcularIngresosPotencialesPlazaGaraje();
+                ingresosRealesP += e.calcularIngresosVendidosPlazaGaraje();
+
+                totalTrasteros += e.getTotalTrasteros();
+                libresT += e.totalTrasterosLibres();
+                vendidosT += e.totalTrasterosVendidos();
+                ingresosPotencialesT += e.calcularIngresosPotencialesTrasteros();
+                ingresosRealesT += e.calcularIngresosVendidosTrasteros();
+            }
+        }
+
+        System.out.println("\n--- VIVIENDAS ---");
+        System.out.printf("Total: %d | Libres: %d | Reservadas: %d | Vendidas: %d\n", totalViviendas, libresV, reservadasV, vendidasV);
+        System.out.printf("Ingresos potenciales: %.2f€ | Ingresos reales: %.2f€\n", ingresosPotencialesV, ingresosRealesV);
+        System.out.println("\n--- PLAZAS DE GARAJE ---");
+        System.out.printf("Total: %d | Libres: %d | Vendidas: %d\n", totalPlazas, libresP, vendidasP);
+        System.out.printf("Ingresos potenciales: %.2f€ | Ingresos reales: %.2f€\n", ingresosPotencialesP, ingresosRealesP);
+        System.out.println("\n--- TRASTEROS ---");
+        System.out.printf("Total: %d | Libres: %d | Vendidos: %d\n", totalTrasteros, libresT, vendidosT);
+        System.out.printf("Ingresos potenciales: %.2f€ | Ingresos reales: %.2f€\n", ingresosPotencialesT, ingresosRealesT);
+    }
+
+    public void listarPropiedadesPorDni(String dni) {
+        for (int i = 0; i < numEdificios; i++) {
+            Edificio e = edificios[i];
+            if (e != null) {
+                String viviendasDni = e.listarViviendasPorDni(dni);
+                if (!viviendasDni.equals("No hay detalles")) {
+                    System.out.println(viviendasDni);
+                }
+                String plazasDni = e.listarPlazasPorDni(dni);
+                if (!plazasDni.equals("No hay detalles")) {
+                    System.out.println(plazasDni);
+                }
+                String trasterosDni = e.listarTrasterosPorDni(dni);
+                if (!trasterosDni.equals("No hay detalles")) {
+                    System.out.println(trasterosDni);
+                }
+            }
+        }
+    }
+
+//FASE D
+
+    public void buscarViviendasPorSuperficie(double metrosMin, double metrosMax) {
+        for (int i = 0; i < numEdificios; i++) {
+            Edificio e = edificios[i];
+            if (e != null) {
+                e.buscarViviendasPorSuperficie(metrosMin, metrosMax);
+            }
+        }
+    }
+
+    public void buscarViviendasPorPrecio(double precioMin, double precioMax) {
+        for (int i = 0; i < numEdificios; i++) {
+            Edificio e = edificios[i];
+            if (e != null) {
+                e.buscarViviendasPorPrecio(precioMin, precioMax);
+            }
+        }
+    }
+
+    public void buscarViviendasPorHabitaciones(int habMin, int habMax) {
+        for (int i = 0; i < numEdificios; i++) {
+            Edificio e = edificios[i];
+            if (e != null) {
+                e.buscarViviendasPorHabitaciones(habMin, habMax);
+            }
+        }
+    }
+
+    public void buscarViviendas(double metrosMin, double metrosMax, double precioMin, double precioMax, int habMin, int habMax) {
+        for (int i = 0; i < numEdificios; i++) {
+            Edificio e = edificios[i];
+            if (e != null) {
+                e.buscarViviendas(metrosMin, metrosMax, precioMin, precioMax, habMin, habMax);
+            }
+        }
+    }
+
+    public void buscarPlazasGarajePorSuperficie(double metrosMin, double metrosMax) {
+        for (int i = 0; i < numEdificios; i++) {
+            Edificio e = edificios[i];
+            if (e != null) {
+                e.buscarPlazasGarajePorSuperficie(metrosMin, metrosMax);
+            }
+        }
+    }
+
+    public void buscarPlazasGarajePorPrecio(double precioMin, double precioMax) {
+        for (int i = 0; i < numEdificios; i++) {
+            Edificio e = edificios[i];
+            if (e != null) {
+                e.buscarPlazasGarajePorPrecio(precioMin, precioMax);
+            }
+        }
+    }
+
+    public void buscarPlazasGarajePorTamano(int filtroTamano) {
+        for (int i = 0; i < numEdificios; i++) {
+            Edificio e = edificios[i];
+            if (e != null) {
+                e.buscarPlazasGarajePorTamano(filtroTamano);
+            }
+        }
+    }
+
+    public void buscarPlazasGaraje(double metrosMin, double metrosMax, double precioMin, double precioMax) {
+        for (int i = 0; i < numEdificios; i++) {
+            Edificio e = edificios[i];
+            if (e != null) {
+                e.buscarPlazasGaraje(metrosMin, metrosMax, precioMin, precioMax);
+            }
+        }
+    }
+
+    public void buscarTrasterosPorSuperficie(double metrosMin, double metrosMax) {
+        for (int i = 0; i < numEdificios; i++) {
+            Edificio e = edificios[i];
+            if (e != null) {
+                e.buscarTrasterosPorSuperficie(metrosMin, metrosMax);
+            }
+        }
+    }
+
+    public void buscarTrasterosPorPrecio(double precioMin, double precioMax) {
+        for (int i = 0; i < numEdificios; i++) {
+            Edificio e = edificios[i];
+            if (e != null) {
+                e.buscarTrasterosPorPrecio(precioMin, precioMax);
+            }
+        }
+    }
+
+    public void buscarTrasterosPorTamano(int filtroTamano) {
+        for (int i = 0; i < numEdificios; i++) {
+            Edificio e = edificios[i];
+            if (e != null) {
+                e.buscarTrasterosPorTamano(filtroTamano);
+            }
+        }
+    }
+
+    public void buscarTrasteros(double metrosMin, double metrosMax, double precioMin, double precioMax) {
+        for (int i = 0; i < numEdificios; i++) {
+            Edificio e = edificios[i];
+            if (e != null) {
+                e.buscarTrasteros(metrosMin, metrosMax, precioMin, precioMax);
+            }
+        }
+    }
 }
