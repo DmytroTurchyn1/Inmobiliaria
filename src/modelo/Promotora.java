@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public class Promotora {
     private String nombre;
-    private Edificio[] edificios;
-    private int numEdificios;
+    private static Edificio[] edificios;
+    private static int numEdificios;
 
     public Promotora(String nombre) {
         edificios = new Edificio[3];
@@ -39,6 +39,11 @@ public class Promotora {
         return numEdificios;
     }
 
+    public static void listarEdificios() {
+        for (int i = 0; i < numEdificios; i++) {
+            System.out.println(i + " - " + edificios[i].getNombre());
+        }
+    }
 
     public boolean venderVivienda(int indiceEdificio, int planta, int puerta, String dni, Vivienda.Calidad calidad) {
         Vivienda vivienda = verificarVivienda(indiceEdificio, planta, puerta);
