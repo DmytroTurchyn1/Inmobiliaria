@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public class Promotora {
     private String nombre;
-    private static Edificio[] edificios;
-    private static int numEdificios;
+    private Edificio[] edificios;
+    private int numEdificios;
 
     public Promotora(String nombre) {
         edificios = new Edificio[3];
