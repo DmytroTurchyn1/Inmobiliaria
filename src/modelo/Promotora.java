@@ -39,6 +39,11 @@ public class Promotora {
         return numEdificios;
     }
 
+    public void listarEdificios() {
+        for (int i = 0; i < numEdificios; i++) {
+            System.out.println(i + " - " + edificios[i].getNombre());
+        }
+    }
 
     public boolean venderVivienda(int indiceEdificio, int planta, int puerta, String dni, Vivienda.Calidad calidad) {
         Vivienda vivienda = verificarVivienda(indiceEdificio, planta, puerta);
