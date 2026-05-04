@@ -33,13 +33,17 @@ class Main {
 
             System.out.println("Seleccione una calidad (ESTANDAR-1, PLUS-2, DE_LUXE-3: ");
             int opcionCalidad = leerEntero();
+            while (opcionCalidad < 1 ||opcionCalidad > 3){
+                System.out.println("Introduce una calidad correcta");
+                opcionCalidad= leerEntero();
+            }
 
             Vivienda.Calidad calidad = null;
-            if (opcionCalidad == 1)calidad = Vivienda.Calidad.ESTANDAR;
+            if (opcionCalidad == 1) calidad = Vivienda.Calidad.ESTANDAR;
             if (opcionCalidad == 2) calidad = Vivienda.Calidad.PLUS;
             if (opcionCalidad == 3) calidad = Vivienda.Calidad.DE_LUXE;
 
-            promotora.venderVivienda(edificio,planta,puerta,dniComp,calidad);
+            promotora.venderVivienda(edificio, planta, puerta, dniComp, calidad);
 
         } else if (eleccion == 2) {
             System.out.println("\n----Menu de Reservas----\n");
@@ -57,12 +61,16 @@ class Main {
             System.out.println("Seleccione una calidad (ESTANDAR-1, PLUS-2, DE_LUXE-3: ");
             int opcionCalidad = leerEntero();
 
+            while(opcionCalidad < 1 ||opcionCalidad > 3){
+                System.out.println("Introduce una calidad correcta");
+                opcionCalidad=leerEntero();
+            }
             Vivienda.Calidad calidad = null;
-            if (opcionCalidad == 1)calidad = Vivienda.Calidad.ESTANDAR;
+            if (opcionCalidad == 1) calidad = Vivienda.Calidad.ESTANDAR;
             if (opcionCalidad == 2) calidad = Vivienda.Calidad.PLUS;
             if (opcionCalidad == 3) calidad = Vivienda.Calidad.DE_LUXE;
+            promotora.reservarVivienda(edificio, planta, puerta, dni, calidad);
 
-            promotora.reservarVivienda(edificio,planta,puerta,dni,calidad);
         }
     }
     public void venderPlazaGaraje(){
@@ -104,12 +112,24 @@ class Main {
         System.out.println("\nSeleccione calidad (ESTANDAR-1, PLUS-2, DE_LUXE-3: ");
         int opcionCalidad = leerEntero();
 
+        // Comprobacion calidad
+        while(opcionCalidad < 1 ||opcionCalidad > 3){
+            System.out.println("Introduce una calidad correcta");
+            opcionCalidad=leerEntero();
+        }
         Vivienda.Calidad calidad = null;
         if (opcionCalidad == 1) calidad = Vivienda.Calidad.ESTANDAR;
         if (opcionCalidad == 2) calidad = Vivienda.Calidad.PLUS;
         if (opcionCalidad == 3) calidad = Vivienda.Calidad.DE_LUXE;
 
-        promotora.getEdificio(edificio).unirViviendas(planta,puerta1,puerta2,dniComp,calidad);
+        //Comprobacion que el indice es correcto
+        Edificio edificio1 = promotora.getEdificio(edificio);
+        while(edificio1 == null){
+            System.out.println("\n Seleccione un edificio correcto: ");
+            int edificio2 = leerEntero();
+            edificio1 = promotora.getEdificio(edificio2);
+        }
+        edificio1.unirViviendas(planta, puerta1, puerta2, dniComp, calidad);
     }
     public void unirTrasteros(){
         System.out.println("\n Seleccione un edificio: ");
@@ -121,8 +141,13 @@ class Main {
         System.out.println("\nInserte su DNI porfavor: ");
         String dni = leerString();
 
-
-        promotora.getEdificio(edificio).unirTrasteros(trastero1, trastero2, dni);
+        Edificio edificio1 = promotora.getEdificio(edificio);
+        while(edificio1 == null){
+            System.out.println("\n Seleccione un edificio correcto: ");
+            int edificio2 = leerEntero();
+            edificio1 = promotora.getEdificio(edificio2);
+        }
+        edificio1.unirTrasteros(trastero1, trastero2, dni);
     }
     public void buscarViviendasPorSuperficie(){
         System.out.println("\n Seleccione los metros minimos: ");

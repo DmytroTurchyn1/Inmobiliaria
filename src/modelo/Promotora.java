@@ -39,7 +39,7 @@ public class Promotora {
         return numEdificios;
     }
 
-    public static void listarEdificios() {
+    public void listarEdificios() {
         for (int i = 0; i < numEdificios; i++) {
             System.out.println(i + " - " + edificios[i].getNombre());
         }
