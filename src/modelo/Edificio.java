@@ -143,7 +143,6 @@ public class Edificio {
             System.out.println();
 
         }
-
     }
 
     public void mostrarMatrizEdificio() {
