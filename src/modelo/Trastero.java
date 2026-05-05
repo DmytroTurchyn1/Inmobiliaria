@@ -15,7 +15,6 @@ public class Trastero {
     String dniComprador;
     double UMBRAL_GRANDE = 7.0;
 
-
     // Constructor
     public Trastero(double precio, double metrosCuadrados){
         this.estado = Estado.LIBRE;

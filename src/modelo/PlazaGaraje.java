@@ -88,6 +88,7 @@ public class PlazaGaraje {
     }
 
 
+
     //metodos/funcion de transacciones
 
     public boolean vender(String dniComprador){

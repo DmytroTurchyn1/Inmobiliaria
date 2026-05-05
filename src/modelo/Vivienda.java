@@ -88,6 +88,8 @@ public class Vivienda {
         this.metrosCuadrados = metrosCuadrados;
     }
 
+
+
     public double getMetrosCuadrados() {
         return metrosCuadrados;
     }

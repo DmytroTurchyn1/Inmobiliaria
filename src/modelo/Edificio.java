@@ -125,13 +125,13 @@ public class Edificio {
                 if (vivienda != null) {
                     switch (vivienda.estado) {
                         case LIBRE:
-                            System.out.print("[L]");
+                            System.out.print("  [L]");
                             break;
                         case RESERVADO:
-                            System.out.print("[R]");
+                            System.out.print("  [R]");
                             break;
                         case VENDIDO:
-                            System.out.print("[V]");
+                            System.out.print("  [V]");
                             break;
                     }
 
@@ -154,6 +154,7 @@ public class Edificio {
             System.out.printf("   P" + (i + 1));
         }
 
+        System.out.println(" ");
 
         for (int planta = 0; planta < 2; planta++) {
 
@@ -163,10 +164,10 @@ public class Edificio {
                 if (plazaGaraje != null) {
                     switch (plazaGaraje.estado) {
                         case LIBRE:
-                            System.out.print("[L]");
+                            System.out.print("  [L]");
                             break;
                         case VENDIDO:
-                            System.out.print("[V]");
+                            System.out.print("  [V]");
                             break;
                     }
                 }
@@ -175,24 +176,26 @@ public class Edificio {
             System.out.println();
         }
 
+
         System.out.println("[TRASTERO]");
         for (int i = 0; i < numTrasteros; i++) {
             System.out.printf("   T" + (i + 1));
         }
+
+        System.out.println(" ");
 
         for (int plaza = 0; plaza < numTrasteros; plaza++) {
             Trastero trastero = trasteros[plaza];
             if (trastero != null) {
                 switch (trastero.estado) {
                     case LIBRE:
-                        System.out.print("[L]");
+                        System.out.print("  [L]");
                         break;
                     case VENDIDO:
-                        System.out.print("[V]");
+                        System.out.print("  [V]");
                         break;
                 }
             }
-
 
         }
 
