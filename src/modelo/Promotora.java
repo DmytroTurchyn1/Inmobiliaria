@@ -3,7 +3,7 @@ package modelo;
 import java.util.Arrays;
 
 public class Promotora {
-    private String nombre;
+    private final String nombre;
     private Edificio[] edificios;
     private int numEdificios;
 
@@ -39,7 +39,7 @@ public class Promotora {
         return numEdificios;
     }
 
-    public String getNombre(){
+    public String getNombre() {
         return nombre;
     }
 

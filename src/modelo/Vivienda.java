@@ -2,26 +2,12 @@ package modelo;
 
 public class Vivienda {
 
-    public enum Estado {
-        LIBRE,
-        RESERVADO,
-        VENDIDO
-    }
-
-    public enum Calidad {
-        ESTANDAR,
-        PLUS,
-        DE_LUXE
-
-    }
-
     Estado estado;
-     double precio;
-     double metrosCuadrados;
-     int habitaciones;
+    double precio;
+    double metrosCuadrados;
+    int habitaciones;
     String dniComprador;
     Calidad calidad;
-
     public Vivienda(double precio, double metrosCuadrados, int habitaciones) {
         this.precio = precio;
         this.metrosCuadrados = metrosCuadrados;
@@ -80,18 +66,16 @@ public class Vivienda {
         this.habitaciones = habitaciones;
     }
 
+    public double getMetrosCuadrados() {
+        return metrosCuadrados;
+    }
+
     public void setMetrosCuadrados(double metrosCuadrados) {
         if (metrosCuadrados < 1) {
             System.out.println("ERROR: MetrosCuadrados tiene que ser mayor o igual a 1");
             return;
         }
         this.metrosCuadrados = metrosCuadrados;
-    }
-
-
-
-    public double getMetrosCuadrados() {
-        return metrosCuadrados;
     }
 
     public Calidad getCalidad() {
@@ -105,7 +89,6 @@ public class Vivienda {
     public double getPrecioBase() {
         return precio;
     }
-
 
     public boolean cumpleSuperficie(double metrosMin, double metrosMax) {
         return metrosCuadrados > metrosMin && metrosCuadrados < metrosMax;
@@ -124,7 +107,7 @@ public class Vivienda {
     }
 
     public boolean vender(String dni, Calidad calidad) {
-        if (dni == null || dni.isEmpty()){
+        if (dni == null || dni.isEmpty()) {
             return false;
         } else {
             this.estado = Estado.VENDIDO;
@@ -135,13 +118,13 @@ public class Vivienda {
     }
 
     public boolean vender(String dni) {
-        if (dni == null || dni.isEmpty()){
+        if (dni == null || dni.isEmpty()) {
             return false;
         } else return vender(dni, Calidad.ESTANDAR);
     }
 
     public boolean reservar(String dni, Calidad calidad) {
-        if (dni == null || dni.isEmpty()){
+        if (dni == null || dni.isEmpty()) {
             return false;
         } else {
             this.estado = Estado.RESERVADO;
@@ -152,8 +135,8 @@ public class Vivienda {
     }
 
     public boolean reservar(String dni) {
-        if (dni == null || dni.isEmpty()){
-         return false;
+        if (dni == null || dni.isEmpty()) {
+            return false;
         } else return reservar(dni, Calidad.ESTANDAR);
     }
 
@@ -162,8 +145,6 @@ public class Vivienda {
         this.dniComprador = null;
         this.calidad = null;
     }
-
-
 
     @Override
     public String toString() {
@@ -181,5 +162,19 @@ public class Vivienda {
                 "\nDNI: " + this.dniComprador +
                 "\nMetros Cuadrados: " + this.metrosCuadrados +
                 "\nPrecio: " + this.getPrecio();
+    }
+
+
+    public enum Estado {
+        LIBRE,
+        RESERVADO,
+        VENDIDO
+    }
+
+    public enum Calidad {
+        ESTANDAR,
+        PLUS,
+        DE_LUXE
+
     }
 }

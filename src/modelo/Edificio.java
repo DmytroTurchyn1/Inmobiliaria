@@ -7,7 +7,6 @@ public class Edificio {
     private static final long SEMILLA = 12345L;
     private static final int PLANTAS_GARAJE = 2;
     private final Random rand = new Random(SEMILLA);
-    private String nombre;
     private final Vivienda[][] viviendas;
     private final int numPlantas;
     private final int viviendasPorPlanta;
@@ -15,6 +14,7 @@ public class Edificio {
     private final int plazasPorPlantaGaraje;
     private final Trastero[] trasteros;
     private final int numTrasteros;
+    private String nombre;
 
 
     public Edificio(String nombre, int numPlantas, int viviendasPorPlanta, int plazasPorPlantaGaraje, int numTrasteros) {
@@ -556,7 +556,7 @@ public class Edificio {
                         v.cumpleSuperficie(metrosMin, metrosMax) &&
                         v.cumplePrecio(precioMin, precioMax) &&
                         v.cumpleHabitaciones(habMin, habMax) &&
-                        v.estaDisponible())  {
+                        v.estaDisponible()) {
                     System.out.println("Planta " + planta + ", Puerta " + puerta + ": " + v);
                     encontrada = true;
                 }
@@ -576,7 +576,7 @@ public class Edificio {
         for (int sotano = 0; sotano < PLANTAS_GARAJE; sotano++) {
             for (int plaza = 0; plaza < plazasPorPlantaGaraje; plaza++) {
                 PlazaGaraje p = garaje[sotano][plaza];
-                if (p != null && p.cumpleSuperficie(metrosMin, metrosMax)&& p.estaDisponible()) {
+                if (p != null && p.cumpleSuperficie(metrosMin, metrosMax) && p.estaDisponible()) {
                     System.out.println("Sótano " + (sotano + 1) + ", Plaza " + plaza + ": " + p);
                     encontrada = true;
                 }
@@ -783,7 +783,7 @@ public class Edificio {
 
             // Nueva vivienda con características nuevas y venta al comprador
             Vivienda nueva = new Vivienda(precioNuevo, metrosNuevo, habNuevo);
-            if(nueva.vender(dni, calidad)){
+            if (nueva.vender(dni, calidad)) {
                 setVivienda(planta, puerta1, nueva);
             }
 
@@ -819,7 +819,7 @@ public class Edificio {
             double metrosNuevo = getTrastero(trastero1).getMetrosCuadrados() + getTrastero(trastero2).getMetrosCuadrados();
 
             Trastero nuevo = new Trastero(precioNuevo, metrosNuevo);
-            if(nuevo.vender(dniComprador)){
+            if (nuevo.vender(dniComprador)) {
                 trasteros[trastero1] = nuevo;
             }
 
