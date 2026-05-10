@@ -124,7 +124,7 @@ public class Vivienda {
     }
 
     public boolean vender(String dni, Calidad calidad) {
-        if (dni == null || dni.isEmpty()){
+        if (dni == null || dni.isBlank()) {
             return false;
         } else {
             this.estado = Estado.VENDIDO;
@@ -135,13 +135,13 @@ public class Vivienda {
     }
 
     public boolean vender(String dni) {
-        if (dni == null || dni.isEmpty()){
+        if (dni == null || dni.isBlank()) {
             return false;
         } else return vender(dni, Calidad.ESTANDAR);
     }
 
     public boolean reservar(String dni, Calidad calidad) {
-        if (dni == null || dni.isEmpty()){
+        if (dni == null || dni.isBlank()) {
             return false;
         } else {
             this.estado = Estado.RESERVADO;
@@ -152,7 +152,7 @@ public class Vivienda {
     }
 
     public boolean reservar(String dni) {
-        if (dni == null || dni.isEmpty()){
+        if (dni == null || dni.isBlank()) {
          return false;
         } else return reservar(dni, Calidad.ESTANDAR);
     }

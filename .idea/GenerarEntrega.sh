@@ -6,7 +6,6 @@ cp "Inmobiliaria.iml" "GrupoR"
 cp .gitignore "GrupoR"
 cp "README.md" "GrupoR"
 cp -r "src" "GrupoR"
-tar -cf "GrupoR.zip" "GrupoR"
+zip -r "GrupoR.zip" "GrupoR"
 rm -rf "GrupoR"
 printf "Archivo 'GrupoR.tar' creado exitosamente.\n"
-

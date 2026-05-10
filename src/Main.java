@@ -1,4 +1,7 @@
-import modelo.*;
+import modelo.Edificio;
+import modelo.Promotora;
+import modelo.Vivienda;
+
 import java.util.Scanner;
 
 class Main {
@@ -7,7 +10,7 @@ class Main {
     private static Promotora promotora;
 
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         scanner = new Scanner(System.in);
         inicializar();
         menuPrincipal();
@@ -322,7 +325,9 @@ class Main {
         System.out.print("\nMetros máximos: "); double metrosMax = leerDouble();
         System.out.print("\nPrecio mínimo: ");  double precioMin = leerDouble();
         System.out.print("\nPrecio máximo: ");  double precioMax = leerDouble();
-        promotora.buscarPlazasGaraje(metrosMin, metrosMax, precioMin, precioMax);
+        System.out.print("\nTamaño (0=todas, 1=pequeñas, 2=grandes): ");
+        int filtroTamano = leerEntero();
+        promotora.buscarPlazasGaraje(metrosMin, metrosMax, precioMin, precioMax, filtroTamano);
     }
     public static void buscarTrasterosPorSuperficie() {
         System.out.print("\nMetros mínimos: "); double metrosMin = leerDouble();
@@ -344,7 +349,9 @@ class Main {
         System.out.print("\nMetros máximos: "); double metrosMax = leerDouble();
         System.out.print("\nPrecio mínimo: ");  double precioMin = leerDouble();
         System.out.print("\nPrecio máximo: ");  double precioMax = leerDouble();
-        promotora.buscarTrasteros(metrosMin, metrosMax, precioMin, precioMax);
+        System.out.print("\nTamaño (0=todos, 1=pequeños, 2=grandes): ");
+        int filtroTamano = leerEntero();
+        promotora.buscarTrasteros(metrosMin, metrosMax, precioMin, precioMax, filtroTamano);
     }
     public static void listarPropiedadesPorDni() {
         System.out.print("Inserte su DNI: ");

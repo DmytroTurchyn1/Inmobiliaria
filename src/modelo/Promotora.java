@@ -3,7 +3,7 @@ package modelo;
 import java.util.Arrays;
 
 public class Promotora {
-    private String nombre;
+    private final String nombre;
     private Edificio[] edificios;
     private int numEdificios;
 
@@ -282,11 +282,11 @@ public class Promotora {
         }
     }
 
-    public void buscarPlazasGaraje(double metrosMin, double metrosMax, double precioMin, double precioMax) {
+    public void buscarPlazasGaraje(double metrosMin, double metrosMax, double precioMin, double precioMax, int filtroTamano) {
         for (int i = 0; i < numEdificios; i++) {
             Edificio e = edificios[i];
             if (e != null) {
-                e.buscarPlazasGaraje(metrosMin, metrosMax, precioMin, precioMax);
+                e.buscarPlazasGaraje(metrosMin, metrosMax, precioMin, precioMax, filtroTamano);
             }
         }
     }
@@ -318,11 +318,11 @@ public class Promotora {
         }
     }
 
-    public void buscarTrasteros(double metrosMin, double metrosMax, double precioMin, double precioMax) {
+    public void buscarTrasteros(double metrosMin, double metrosMax, double precioMin, double precioMax, int filtroTamano) {
         for (int i = 0; i < numEdificios; i++) {
             Edificio e = edificios[i];
             if (e != null) {
-                e.buscarTrasteros(metrosMin, metrosMax, precioMin, precioMax);
+                e.buscarTrasteros(metrosMin, metrosMax, precioMin, precioMax, filtroTamano);
             }
         }
     }

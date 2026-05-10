@@ -638,11 +638,12 @@ public class Edificio {
     }
 
     // 7.3 Búsqueda combinada de plazas de garaje
-    public void buscarPlazasGaraje(double metrosMin, double metrosMax, double precioMin, double precioMax) {
+    public void buscarPlazasGaraje(double metrosMin, double metrosMax, double precioMin, double precioMax, int filtroTamano) {
         System.out.println("\n=== Búsqueda combinada de plazas de garaje ===");
         System.out.println("Criterios:");
         System.out.println("  - Superficie: " + metrosMin + " - " + metrosMax + " m2");
         System.out.println("  - Precio: " + precioMin + " - " + precioMax + " €");
+        System.out.println("  - Tamaño: " + filtroTamano);
         System.out.println("Resultados:");
 
         boolean encontrada = false;
@@ -653,6 +654,7 @@ public class Edificio {
                 if (p != null &&
                         p.cumpleSuperficie(metrosMin, metrosMax) &&
                         p.cumplePrecio(precioMin, precioMax) &&
+                        p.cumpleTamano(filtroTamano) &&
                         p.estaDisponible()) {
                     System.out.println("Sótano " + (sotano + 1) + ", Plaza " + plaza + ": " + p);
                     encontrada = true;
@@ -729,11 +731,12 @@ public class Edificio {
     }
 
     // 7.4 Búsqueda combinada de trasteros
-    public void buscarTrasteros(double metrosMin, double metrosMax, double precioMin, double precioMax) {
+    public void buscarTrasteros(double metrosMin, double metrosMax, double precioMin, double precioMax, int filtroTamano) {
         System.out.println("\n=== Búsqueda combinada de trasteros ===");
         System.out.println("Criterios:");
         System.out.println("  - Superficie: " + metrosMin + " - " + metrosMax + " m2");
         System.out.println("  - Precio: " + precioMin + " - " + precioMax + " €");
+        System.out.println("  - Tamaño: " + filtroTamano);
         System.out.println("Resultados:");
 
         boolean encontrada = false;
@@ -743,6 +746,7 @@ public class Edificio {
             if (t != null &&
                     t.cumpleSuperficie(metrosMin, metrosMax) &&
                     t.cumplePrecio(precioMin, precioMax) &&
+                    t.cumpleTamano(filtroTamano) &&
                     t.estaDisponible()) {
                 System.out.println("Trastero " + i + ": " + t);
                 encontrada = true;
