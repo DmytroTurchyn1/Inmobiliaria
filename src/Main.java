@@ -21,9 +21,9 @@ class Main {
     private static void inicializar() {
         promotora = new Promotora("Inmobiliaria SA");
 
-        promotora.agregarEdificio(new Edificio("Edificio Azul", 5, 4, 8, 10));
-        promotora.agregarEdificio(new Edificio("Edificio Verde", 4, 3, 6, 8));
-        promotora.agregarEdificio(new Edificio("Edificio Rojo", 6, 5, 10, 12));
+        promotora.agregarEdificio(new Edificio("Edificio Azul",   5, 4, 8, 10));
+        promotora.agregarEdificio(new Edificio("Edificio Verde",  4, 3, 6,  8));
+        promotora.agregarEdificio(new Edificio("Edificio Rojo",   6, 5, 10, 12));
 
         System.out.println("=== Bienvenido a " + promotora.getNombre() + " ===\n");
     }
@@ -166,14 +166,10 @@ class Main {
 
         if (eleccion == 1) {
             System.out.println("\n----Menú de Ventas----\n");
-            System.out.print("Seleccione un edificio: ");
-            int edificio = leerEntero();
-            System.out.print("\nSeleccione una planta: ");
-            int planta = leerEntero();
-            System.out.print("\nSeleccione una puerta: ");
-            int puerta = leerEntero();
-            System.out.print("Inserte su DNI: ");
-            String dniComp = leerString();
+            System.out.print("Seleccione un edificio: ");   int edificio      = leerEntero();
+            System.out.print("\nSeleccione una planta: ");  int planta        = leerEntero();
+            System.out.print("\nSeleccione una puerta: ");  int puerta        = leerEntero();
+            System.out.print("Inserte su DNI: ");           String dniComp    = leerString();
 
             System.out.print("Seleccione calidad (ESTANDAR-1, PLUS-2, DE_LUXE-3): ");
             int opcionCalidad = leerEntero();
@@ -186,14 +182,10 @@ class Main {
 
         } else if (eleccion == 2) {
             System.out.println("\n----Menú de Reservas----\n");
-            System.out.print("Seleccione un edificio: ");
-            int edificio = leerEntero();
-            System.out.print("\nSeleccione una planta: ");
-            int planta = leerEntero();
-            System.out.print("\nSeleccione una puerta: ");
-            int puerta = leerEntero();
-            System.out.print("Inserte su DNI: ");
-            String dni = leerString();
+            System.out.print("Seleccione un edificio: ");   int edificio   = leerEntero();
+            System.out.print("\nSeleccione una planta: ");  int planta     = leerEntero();
+            System.out.print("\nSeleccione una puerta: ");  int puerta     = leerEntero();
+            System.out.print("Inserte su DNI: ");           String dni     = leerString();
 
             System.out.print("Seleccione calidad (ESTANDAR-1, PLUS-2, DE_LUXE-3): ");
             int opcionCalidad = leerEntero();
@@ -207,24 +199,17 @@ class Main {
     }
 
     public static void venderPlazaGaraje() {
-        System.out.print("Seleccione un edificio: ");
-        int edificio = leerEntero();
-        System.out.print("\nSeleccione el sótano: ");
-        int sotano = leerEntero();
-        System.out.print("\nSeleccione la plaza: ");
-        int plaza = leerEntero();
-        System.out.print("Inserte su DNI: ");
-        String dni = leerString();
+        System.out.print("Seleccione un edificio: "); int edificio = leerEntero();
+        System.out.print("\nSeleccione el sótano: ");  int sotano   = leerEntero();
+        System.out.print("\nSeleccione la plaza: ");   int plaza    = leerEntero();
+        System.out.print("Inserte su DNI: ");          String dni   = leerString();
         promotora.venderPlazaGaraje(edificio, sotano, plaza, dni);
     }
 
     public static void venderTrastero() {
-        System.out.print("Seleccione un edificio: ");
-        int edificio = leerEntero();
-        System.out.print("\nSeleccione el trastero: ");
-        int indice = leerEntero();
-        System.out.print("\nInserte su DNI: ");
-        String dni = leerString();
+        System.out.print("Seleccione un edificio: "); int edificio = leerEntero();
+        System.out.print("\nSeleccione el trastero: ");int indice   = leerEntero();
+        System.out.print("\nInserte su DNI: ");        String dni   = leerString();
         promotora.venderTrastero(edificio, indice, dni);
     }
 
@@ -232,16 +217,11 @@ class Main {
         System.out.println("----EDIFICIOS----");
         promotora.listarEdificios();
 
-        System.out.print("\nSeleccione un edificio: ");
-        int edificio = leerEntero();
-        System.out.print("\nSeleccione una planta: ");
-        int planta = leerEntero();
-        System.out.print("\nPrimera puerta contigua: ");
-        int puerta1 = leerEntero();
-        System.out.print("\nSegunda puerta contigua: ");
-        int puerta2 = leerEntero();
-        System.out.print("\nInserte su DNI: ");
-        String dniComp = leerString();
+        System.out.print("\nSeleccione un edificio: "); int edificio = leerEntero();
+        System.out.print("\nSeleccione una planta: ");  int planta   = leerEntero();
+        System.out.print("\nPrimera puerta contigua: "); int puerta1 = leerEntero();
+        System.out.print("\nSegunda puerta contigua: "); int puerta2 = leerEntero();
+        System.out.print("\nInserte su DNI: ");          String dniComp = leerString();
 
         System.out.print("\nSeleccione calidad (ESTANDAR-1, PLUS-2, DE_LUXE-3): ");
         int opcionCalidad = leerEntero();
@@ -260,14 +240,10 @@ class Main {
     }
 
     public static void unirTrasteros() {
-        System.out.print("\nSeleccione un edificio: ");
-        int edificio = leerEntero();
-        System.out.print("\nSeleccione el primer trastero: ");
-        int trastero1 = leerEntero();
-        System.out.print("\nSeleccione el segundo trastero: ");
-        int trastero2 = leerEntero();
-        System.out.print("\nInserte su DNI: ");
-        String dni = leerString();
+        System.out.print("\nSeleccione un edificio: ");      int edificio  = leerEntero();
+        System.out.print("\nSeleccione el primer trastero: ");int trastero1 = leerEntero();
+        System.out.print("\nSeleccione el segundo trastero: ");int trastero2 = leerEntero();
+        System.out.print("\nInserte su DNI: ");               String dni    = leerString();
 
         Edificio edificio1 = promotora.getEdificio(edificio);
         while (edificio1 == null) {
@@ -288,15 +264,15 @@ class Main {
         System.out.print("\nOpción: ");
         int op = leerEntero();
         switch (op) {
-            case 1 -> buscarViviendasPorSuperficie();
-            case 2 -> buscarViviendasPorPrecio();
-            case 3 -> buscarViviendasPorHabitaciones();
-            case 4 -> buscarViviendas();
-            case 5 -> buscarPlazasGarajePorSuperficie();
-            case 6 -> buscarPlazasGarajePorPrecio();
-            case 7 -> buscarPlazasGarajePorTamano();
-            case 8 -> buscarPlazasGaraje();
-            case 9 -> buscarTrasterosPorSuperficie();
+            case 1  -> buscarViviendasPorSuperficie();
+            case 2  -> buscarViviendasPorPrecio();
+            case 3  -> buscarViviendasPorHabitaciones();
+            case 4  -> buscarViviendas();
+            case 5  -> buscarPlazasGarajePorSuperficie();
+            case 6  -> buscarPlazasGarajePorPrecio();
+            case 7  -> buscarPlazasGarajePorTamano();
+            case 8  -> buscarPlazasGaraje();
+            case 9  -> buscarTrasterosPorSuperficie();
             case 10 -> buscarTrasterosPorPrecio();
             case 11 -> buscarTrasterosPorTamano();
             case 12 -> buscarTrasteros();
@@ -306,127 +282,90 @@ class Main {
 
     // redireccion de busquedas
     public static void buscarViviendasPorSuperficie() {
-        System.out.print("\nMetros mínimos: ");
-        double metrosMin = leerDouble();
-        System.out.print("\nMetros máximos: ");
-        double metrosMax = leerDouble();
+        System.out.print("\nMetros mínimos: "); double metrosMin = leerDouble();
+        System.out.print("\nMetros máximos: "); double metrosMax = leerDouble();
         promotora.buscarViviendasPorSuperficie(metrosMin, metrosMax);
     }
-
     public static void buscarViviendasPorPrecio() {
-        System.out.print("\nPrecio mínimo: ");
-        double precioMin = leerDouble();
-        System.out.print("\nPrecio máximo: ");
-        double precioMax = leerDouble();
+        System.out.print("\nPrecio mínimo: "); double precioMin = leerDouble();
+        System.out.print("\nPrecio máximo: "); double precioMax = leerDouble();
         promotora.buscarViviendasPorPrecio(precioMin, precioMax);
     }
-
     public static void buscarViviendasPorHabitaciones() {
-        System.out.print("\nHabitaciones mínimas: ");
-        int habMin = leerEntero();
-        System.out.print("\nHabitaciones máximas: ");
-        int habMax = leerEntero();
+        System.out.print("\nHabitaciones mínimas: "); int habMin = leerEntero();
+        System.out.print("\nHabitaciones máximas: "); int habMax = leerEntero();
         promotora.buscarViviendasPorHabitaciones(habMin, habMax);
     }
-
     public static void buscarViviendas() {
-        System.out.print("\nMetros mínimos: ");
-        double metrosMin = leerDouble();
-        System.out.print("\nMetros máximos: ");
-        double metrosMax = leerDouble();
-        System.out.print("\nPrecio mínimo: ");
-        double precioMin = leerDouble();
-        System.out.print("\nPrecio máximo: ");
-        double precioMax = leerDouble();
-        System.out.print("\nHabitaciones mínimas: ");
-        int habMin = leerEntero();
-        System.out.print("\nHabitaciones máximas: ");
-        int habMax = leerEntero();
+        System.out.print("\nMetros mínimos: ");       double metrosMin = leerDouble();
+        System.out.print("\nMetros máximos: ");       double metrosMax = leerDouble();
+        System.out.print("\nPrecio mínimo: ");        double precioMin = leerDouble();
+        System.out.print("\nPrecio máximo: ");        double precioMax = leerDouble();
+        System.out.print("\nHabitaciones mínimas: "); int habMin       = leerEntero();
+        System.out.print("\nHabitaciones máximas: "); int habMax       = leerEntero();
         promotora.buscarViviendas(metrosMin, metrosMax, precioMin, precioMax, habMin, habMax);
     }
-
     public static void buscarPlazasGarajePorSuperficie() {
-        System.out.print("\nMetros mínimos: ");
-        double metrosMin = leerDouble();
-        System.out.print("\nMetros máximos: ");
-        double metrosMax = leerDouble();
+        System.out.print("\nMetros mínimos: "); double metrosMin = leerDouble();
+        System.out.print("\nMetros máximos: "); double metrosMax = leerDouble();
         promotora.buscarPlazasGarajePorSuperficie(metrosMin, metrosMax);
     }
-
     public static void buscarPlazasGarajePorPrecio() {
-        System.out.print("\nPrecio mínimo: ");
-        double precioMin = leerDouble();
-        System.out.print("\nPrecio máximo: ");
-        double precioMax = leerDouble();
+        System.out.print("\nPrecio mínimo: "); double precioMin = leerDouble();
+        System.out.print("\nPrecio máximo: "); double precioMax = leerDouble();
         promotora.buscarPlazasGarajePorPrecio(precioMin, precioMax);
     }
-
     public static void buscarPlazasGarajePorTamano() {
         System.out.print("\nTamaño (0=todas, 1=pequeñas, 2=grandes): ");
         int filtroTamano = leerEntero();
         promotora.buscarPlazasGarajePorTamano(filtroTamano);
     }
-
     public static void buscarPlazasGaraje() {
-        System.out.print("\nMetros mínimos: ");
-        double metrosMin = leerDouble();
-        System.out.print("\nMetros máximos: ");
-        double metrosMax = leerDouble();
-        System.out.print("\nPrecio mínimo: ");
-        double precioMin = leerDouble();
-        System.out.print("\nPrecio máximo: ");
-        double precioMax = leerDouble();
-        promotora.buscarPlazasGaraje(metrosMin, metrosMax, precioMin, precioMax);
+        System.out.print("\nMetros mínimos: "); double metrosMin = leerDouble();
+        System.out.print("\nMetros máximos: "); double metrosMax = leerDouble();
+        System.out.print("\nPrecio mínimo: ");  double precioMin = leerDouble();
+        System.out.print("\nPrecio máximo: ");  double precioMax = leerDouble();
+        System.out.print("\nTamaño (0=todas, 1=pequeñas, 2=grandes): ");
+        int filtroTamano = leerEntero();
+        promotora.buscarPlazasGaraje(metrosMin, metrosMax, precioMin, precioMax, filtroTamano);
     }
-
     public static void buscarTrasterosPorSuperficie() {
-        System.out.print("\nMetros mínimos: ");
-        double metrosMin = leerDouble();
-        System.out.print("\nMetros máximos: ");
-        double metrosMax = leerDouble();
+        System.out.print("\nMetros mínimos: "); double metrosMin = leerDouble();
+        System.out.print("\nMetros máximos: "); double metrosMax = leerDouble();
         promotora.buscarTrasterosPorSuperficie(metrosMin, metrosMax);
     }
-
     public static void buscarTrasterosPorPrecio() {
-        System.out.print("\nPrecio mínimo: ");
-        double precioMin = leerDouble();
-        System.out.print("\nPrecio máximo: ");
-        double precioMax = leerDouble();
+        System.out.print("\nPrecio mínimo: "); double precioMin = leerDouble();
+        System.out.print("\nPrecio máximo: "); double precioMax = leerDouble();
         promotora.buscarTrasterosPorPrecio(precioMin, precioMax);
     }
-
     public static void buscarTrasterosPorTamano() {
         System.out.print("\nTamaño (0=todos, 1=pequeños, 2=grandes): ");
         int filtroTamano = leerEntero();
         promotora.buscarTrasterosPorTamano(filtroTamano);
     }
-
     public static void buscarTrasteros() {
-        System.out.print("\nMetros mínimos: ");
-        double metrosMin = leerDouble();
-        System.out.print("\nMetros máximos: ");
-        double metrosMax = leerDouble();
-        System.out.print("\nPrecio mínimo: ");
-        double precioMin = leerDouble();
-        System.out.print("\nPrecio máximo: ");
-        double precioMax = leerDouble();
-        promotora.buscarTrasteros(metrosMin, metrosMax, precioMin, precioMax);
+        System.out.print("\nMetros mínimos: "); double metrosMin = leerDouble();
+        System.out.print("\nMetros máximos: "); double metrosMax = leerDouble();
+        System.out.print("\nPrecio mínimo: ");  double precioMin = leerDouble();
+        System.out.print("\nPrecio máximo: ");  double precioMax = leerDouble();
+        System.out.print("\nTamaño (0=todos, 1=pequeños, 2=grandes): ");
+        int filtroTamano = leerEntero();
+        promotora.buscarTrasteros(metrosMin, metrosMax, precioMin, precioMax, filtroTamano);
     }
-
     public static void listarPropiedadesPorDni() {
         System.out.print("Inserte su DNI: ");
         String dni = leerString();
         promotora.listarPropiedadesPorDni(dni);
     }
-
     public static void mostrarEstadisticasGenerales() {
         promotora.mostrarEstadisticasGenerales();
     }
 
     private static Vivienda.Calidad opcionToCalidad(int opcion) {
         return switch (opcion) {
-            case 1 -> Vivienda.Calidad.ESTANDAR;
-            case 2 -> Vivienda.Calidad.PLUS;
+            case 1  -> Vivienda.Calidad.ESTANDAR;
+            case 2  -> Vivienda.Calidad.PLUS;
             default -> Vivienda.Calidad.DE_LUXE;
         };
     }
