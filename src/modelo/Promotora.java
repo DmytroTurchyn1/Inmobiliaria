@@ -49,6 +49,26 @@ public class Promotora {
         }
     }
 
+    private Edificio verificarEdificio(int indiceEdificio) {
+        Edificio edificio = getEdificio(indiceEdificio);
+        if (edificio == null) {
+            System.out.println("No existe el edificio");
+            return null;
+        }
+        return edificio;
+    }
+
+    private Vivienda verificarVivienda(int indiceEdificio, int planta, int puerta) {
+        Edificio edificio = verificarEdificio(indiceEdificio);
+        if (edificio == null) return null;
+        Vivienda vivienda = edificio.getVivienda(planta, puerta);
+        if (vivienda == null) {
+            System.out.println("No existe la vivienda");
+            return null;
+        }
+        return vivienda;
+    }
+
     public boolean venderVivienda(int indiceEdificio, int planta, int puerta, String dni, Vivienda.Calidad calidad) {
         Vivienda vivienda = verificarVivienda(indiceEdificio, planta, puerta);
         if (vivienda == null) return false;
@@ -118,26 +138,6 @@ public class Promotora {
 
     }
 
-    private Vivienda verificarVivienda(int indiceEdificio, int planta, int puerta) {
-        Edificio edificio = verificarEdificio(indiceEdificio);
-        if (edificio == null) return null;
-        Vivienda vivienda = edificio.getVivienda(planta, puerta);
-        if (vivienda == null) {
-            System.out.println("No existe la vivienda");
-            return null;
-        }
-        return vivienda;
-    }
-
-    private Edificio verificarEdificio(int indiceEdificio) {
-        Edificio edificio = getEdificio(indiceEdificio);
-        if (edificio == null) {
-            System.out.println("No existe el edificio");
-            return null;
-        }
-        return edificio;
-    }
-
     // FASE C
 
     public void mostrarEstadisticasGenerales() {
@@ -200,7 +200,7 @@ public class Promotora {
             Edificio e = edificios[i];
             if (e != null) {
                 String viviendasDni = e.listarViviendasPorDni(dni);
-                if (!viviendasDni.equals("No hay detalles")) {
+                if (!viviendasDni.equals("No hay detalles")) { // Opción de utilizar isBlank
                     System.out.println(viviendasDni);
                 }
                 String plazasDni = e.listarPlazasPorDni(dni);

@@ -10,7 +10,7 @@ class Main {
     private static Promotora promotora;
 
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
         scanner = new Scanner(System.in);
         inicializar();
         menuPrincipal();
@@ -29,6 +29,14 @@ class Main {
     }
 
     //f metodo de auxiliares
+    private static Vivienda.Calidad opcionToCalidad(int opcion) {
+        return switch (opcion) {
+            case 1  -> Vivienda.Calidad.ESTANDAR;
+            case 2  -> Vivienda.Calidad.PLUS;
+            default -> Vivienda.Calidad.DE_LUXE;
+        };
+    }
+
     public static String leerString() {
         return scanner.nextLine().trim();
     }
@@ -154,6 +162,7 @@ class Main {
         }
         edificio.mostrarMatrizEdificio();
     }
+
 
 
     //menus de v ender
@@ -362,11 +371,5 @@ class Main {
         promotora.mostrarEstadisticasGenerales();
     }
 
-    private static Vivienda.Calidad opcionToCalidad(int opcion) {
-        return switch (opcion) {
-            case 1  -> Vivienda.Calidad.ESTANDAR;
-            case 2  -> Vivienda.Calidad.PLUS;
-            default -> Vivienda.Calidad.DE_LUXE;
-        };
-    }
+
 }
