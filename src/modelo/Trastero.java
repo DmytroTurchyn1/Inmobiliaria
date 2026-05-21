@@ -3,19 +3,22 @@ package modelo;
 
 public class Trastero {
 
+    public enum Estado {
+        LIBRE, VENDIDO
+    }
     // Atributos principales
     Estado estado;
     double precio;
     double metrosCuadrados;
     String dniComprador;
     double UMBRAL_GRANDE = 7.0;
+
     // Constructor
     public Trastero(double precio, double metrosCuadrados) {
         this.estado = Estado.LIBRE;
         this.precio = precio;
         this.metrosCuadrados = metrosCuadrados;
         this.dniComprador = null;
-
     }
 
     public Estado getEstado() {
@@ -126,16 +129,13 @@ public class Trastero {
         }
 
         return "DETALLES :" +
-                "\nESTADO -> " + estado +
+                "\nESTADO -> " + this.getEstado() +
                 "\nTAMAÑO ->" + tamano +
-                "\nPRECIO -> " + precio +
-                "\nMETROS^2 -> " + metrosCuadrados +
-                "\nDNI COMPRADOR ->" + dniComprador;
+                "\nPRECIO -> " + this.getPrecio() +
+                "\nMETROS^2 -> " + this.getMetrosCuadrados() +
+                "\nDNI COMPRADOR ->" + this.getDniComprador();
     }
 
-    public enum Estado {
-        LIBRE, VENDIDO
-    }
 }
 
 

@@ -2,6 +2,9 @@ package modelo;
 
 public class PlazaGaraje {
 
+    public enum Estado {
+        LIBRE, VENDIDO
+    }
     //defino las variables
     double precio = 0;
     double metrosCuadrados = 0;
@@ -114,7 +117,7 @@ public class PlazaGaraje {
     }
 
     public String getDetalles() {
-        String tamano;
+        String tamano="";
 
         if (esGrande()) {
             tamano = "GRANDE";
@@ -123,16 +126,11 @@ public class PlazaGaraje {
         }
 
         return "DETALLES :" +
-                "\nESTADO -> " + estado +
+                "\nESTADO -> " + this.getEstado() +
                 "\nTAMAÑO ->" + tamano +
-                "\nPRECIO -> " + precio +
-                "\nMETROS^2 -> " + metrosCuadrados +
-                "\nDNI COMPRADOR ->" + dniComprador;
-    }
-
-    //Enumero el estado
-    public enum Estado {
-        LIBRE, VENDIDO
+                "\nPRECIO -> " + this.getPrecio() +
+                "\nMETROS^2 -> " + this.getMetrosCuadrados() +
+                "\nDNI COMPRADOR ->" + this.getDniComprador();
     }
 }
 

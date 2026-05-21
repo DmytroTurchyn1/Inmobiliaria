@@ -108,7 +108,7 @@ public class Edificio {
     }
 
     public void mostrarEstado() {
-        System.out.println("Edificio residencial " + nombre);
+        System.out.println("Edificio residencial " + getNombre());
         for (int i = 0; i < viviendasPorPlanta; i++) {
             System.out.printf("   P" + (i + 1));
 
@@ -123,7 +123,7 @@ public class Edificio {
                 Vivienda vivienda = viviendas[planta][puerta];
 
                 if (vivienda != null) {
-                    switch (vivienda.estado) {
+                    switch (vivienda.getEstado()) {
                         case LIBRE:
                             System.out.print("  [L]");
                             break;
@@ -161,7 +161,7 @@ public class Edificio {
             for (int plaza = 0; plaza < plazasPorPlantaGaraje; plaza++) {
                 PlazaGaraje plazaGaraje = garaje[planta][plaza];
                 if (plazaGaraje != null) {
-                    switch (plazaGaraje.estado) {
+                    switch (plazaGaraje.getEstado()) {
                         case LIBRE:
                             System.out.print("  [L]");
                             break;
@@ -186,7 +186,7 @@ public class Edificio {
         for (int plaza = 0; plaza < numTrasteros; plaza++) {
             Trastero trastero = trasteros[plaza];
             if (trastero != null) {
-                switch (trastero.estado) {
+                switch (trastero.getEstado()) {
                     case LIBRE:
                         System.out.print("  [L]");
                         break;
@@ -894,10 +894,11 @@ public class Edificio {
 
     // Métodos de Listado
     public String listarViviendasPorDni(String dni) {
-        StringBuilder detalles = new StringBuilder();
         if (dni == null || dni.isEmpty()) {
             return "Dni no valido";
-        } else {
+        }
+
+        StringBuilder detalles = new StringBuilder();
             for (int i = 0; i < viviendas.length; i++) {
                 for (int j = 0; j < viviendas[0].length; j++) {
                     if (viviendas[i][j] != null) {
@@ -911,14 +912,16 @@ public class Edificio {
                 detalles = new StringBuilder("No hay detalles");
             }
             return detalles.toString();
-        }
+
     }
 
     public String listarPlazasPorDni(String dni) {
-        StringBuilder detalles = new StringBuilder();
         if (dni == null || dni.isEmpty()) {
             return "Dni no valido";
         }
+
+        StringBuilder detalles = new StringBuilder();
+
         for (int i = 0; i < garaje.length; i++) {
             for (int j = 0; j < garaje[0].length; j++) {
                 if (garaje[i][j] != null &&
@@ -935,11 +938,12 @@ public class Edificio {
     }
 
     public String listarTrasterosPorDni(String dni) {
-        StringBuilder detalles = new StringBuilder();
-
         if (dni == null || dni.isEmpty()) {
             return "Dni no valido";
         }
+
+        StringBuilder detalles = new StringBuilder();
+
         for (int i = 0; i < trasteros.length; i++) {
             if (trasteros[i] != null &&
                     trasteros[i].getEstado() == Trastero.Estado.VENDIDO &&
