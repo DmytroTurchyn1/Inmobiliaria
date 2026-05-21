@@ -87,6 +87,9 @@ public class Trastero {
     public boolean vender(String dniComprador) {
         if (dniComprador == null || dniComprador.isEmpty()) {
             return false;
+        }
+        if (!this.estaDisponible()) {
+            return false;
         } else {
             estado = Estado.VENDIDO;
             this.dniComprador = dniComprador;

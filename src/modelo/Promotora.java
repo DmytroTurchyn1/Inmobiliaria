@@ -55,7 +55,6 @@ public class Promotora {
         if (vivienda.vender(dni, calidad)) {
             return true;
         }
-
         System.out.println("Error al vender la vivienda");
         return false;
     }
@@ -67,7 +66,6 @@ public class Promotora {
         if (vivienda.reservar(dni, calidad)) {
             return true;
         }
-
         System.out.println("Error al reservar la vivienda");
         return false;
     }

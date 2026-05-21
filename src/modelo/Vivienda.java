@@ -126,6 +126,9 @@ public class Vivienda {
     public boolean vender(String dni, Calidad calidad) {
         if (dni == null || dni.isBlank()) {
             return false;
+        }
+        if (!this.estaDisponible()) {
+            return false;
         } else {
             this.estado = Estado.VENDIDO;
             this.calidad = calidad;
@@ -142,6 +145,9 @@ public class Vivienda {
 
     public boolean reservar(String dni, Calidad calidad) {
         if (dni == null || dni.isBlank()) {
+            return false;
+        }
+        if (!this.estaDisponible()) {
             return false;
         } else {
             this.estado = Estado.RESERVADO;
